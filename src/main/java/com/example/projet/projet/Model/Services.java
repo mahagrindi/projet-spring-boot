@@ -22,11 +22,11 @@ import org.hibernate.annotations.OnDeleteAction;
 public class Services {
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
-private int id;
+private Long id;
 @Column(name = "Nom", length = 250, nullable = false)
 private String Nom;
 @Column(name = "Prix", length = 4, nullable = false)
-private long Prix;
+private double Prix;
 @Column(name = "Description", length = 250, nullable = false)
 private String Description;
 @Column(name = "Image", length = 250, nullable = false)
@@ -47,11 +47,11 @@ cascade = {
 },
 mappedBy = "Services")
 
-public int getId() {
+public Long getId() {
     return id;
 }
 
-public void setId(int id) {
+public void setId(Long id) {
     this.id = id;
 }
 
@@ -63,11 +63,11 @@ public void setNom(String nom) {
     Nom = nom;
 }
 
-public long getPrix() {
+public double getPrix() {
     return Prix;
 }
 
-public void setPrix(long prix) {
+public void setPrix(double prix) {
     Prix = prix;
 }
 

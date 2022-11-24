@@ -27,6 +27,11 @@ orphanRemoval = false, fetch = FetchType.LAZY)
 private Set<Services> service;
 
 
+@OneToMany(targetEntity = Techniciens.class, mappedBy = "id",
+orphanRemoval = false, fetch = FetchType.LAZY)
+private Set<Techniciens> technicien;
+
+
 public Long getId() {
     return id;
 }
@@ -57,10 +62,24 @@ public void setService(Set<Services> service) {
 }
 
 
+public Set<Techniciens> getTechnicien() {
+    return technicien;
+}
+
+
+public void setTechnicien(Set<Techniciens> technicien) {
+    this.technicien = technicien;
+}
+
+
 @Override
 public String toString() {
-    return "Categories [id=" + id + ", Libelle=" + Libelle + ", service=" + service + "]";
+    return "Categories [id=" + id + ", Libelle=" + Libelle + ", service=" + service + ", technicien=" + technicien
+            + "]";
 }
+
+
+
 
 
 

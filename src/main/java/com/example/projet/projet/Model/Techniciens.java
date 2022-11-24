@@ -7,8 +7,15 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "Techniciens")
@@ -29,6 +36,12 @@ private Long Phone;
 @Column(name = "Adresse", length = 250, nullable = false)
 private String Adresse;
 
+@ManyToOne(fetch = FetchType.LAZY)
+@JoinColumn(name = "categorie_id", insertable = false,
+updatable = false)
+@OnDelete(action = OnDeleteAction.CASCADE)
+@Fetch(FetchMode.JOIN)
+private Categories categorie;
 
 @ManyToMany(fetch = FetchType.LAZY,
 cascade = {
