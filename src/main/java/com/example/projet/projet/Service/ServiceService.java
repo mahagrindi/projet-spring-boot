@@ -29,5 +29,13 @@ public Services addService(Services service){
     return serviceRepository.save(service);
  }
 
+ public Services getServiceById(Long id){
+    return serviceRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Client ID not found"));
+}
+
+public String deleteService(Long id) {
+    serviceRepository.deleteById(id);
+    return "deleted";
+}
 
 }

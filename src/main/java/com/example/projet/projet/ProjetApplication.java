@@ -12,10 +12,7 @@ public class ProjetApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetApplication.class, args);
 	}
-	@GetMapping(value="/hello")
-	public String getMethodName() {
-		return "hello world";
-	}
+
 	
 	
 
