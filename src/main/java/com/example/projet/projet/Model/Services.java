@@ -33,8 +33,7 @@ private String Description;
 private String Image;
 
 @ManyToOne(fetch = FetchType.LAZY)
-@JoinColumn(name = "categorie_id", insertable = false,
-updatable = false)
+@JoinColumn(name = "categorie_id")
 @OnDelete(action = OnDeleteAction.CASCADE)
 @Fetch(FetchMode.JOIN)
 private Categories categorie;

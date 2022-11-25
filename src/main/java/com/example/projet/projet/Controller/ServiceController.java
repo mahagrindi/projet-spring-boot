@@ -1,9 +1,9 @@
 package com.example.projet.projet.Controller;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,15 +27,27 @@ public class ServiceController {
         this.serviceService = serviceService;
     }
 
-    @RequestMapping(path = "/services/all",method = RequestMethod.GET)
-    @ResponseBody
-    public List<Services> getServices(){
-        return serviceService.selectAll();
-    }
+    // @RequestMapping(path = "/services/all",method = RequestMethod.GET)
+    // @ResponseBody
+    // public List<Services> getServices(){
+    //     return serviceService.selectAll();
+    // } 
 
-    // similaire a GETMAPPING
+
+    @GetMapping("/services/all")
+public String viewHomePage(Model model) {
+model.addAttribute("allServices", serviceService.selectAll());
+return "index";
+}
+
+    // similaire a POSTMAPPING
     @RequestMapping(path = "/services/add",method = RequestMethod.POST)
     @ResponseBody
+    public String saveService(Model model){
+        model.addAttribute("newService",new Services());
+        return "add-service";
+    }
+
     public Services saveService(@RequestBody Services service){
         return serviceService.addService(service);
     }
