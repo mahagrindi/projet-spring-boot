@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.projet.projet.Model.Services;
+import com.example.projet.projet.Model.ServiceEntity;
 import com.example.projet.projet.Repository.ServiceRepository;
 
 @Service
@@ -21,15 +21,15 @@ public ServiceService(ServiceRepository serviceRepository){
 
 
 
-public List<Services> selectAll(){
-    return  (List<Services>) serviceRepository.findAll();
+public List<ServiceEntity> selectAll(){
+    return  (List<ServiceEntity>) serviceRepository.findAll();
 }
 
-public Services addService(Services service){
+public ServiceEntity addService(ServiceEntity service){
     return serviceRepository.save(service);
  }
 
- public Services getServiceById(Long id){
+ public ServiceEntity getServiceById(Long id){
     return serviceRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Client ID not found"));
 }
 

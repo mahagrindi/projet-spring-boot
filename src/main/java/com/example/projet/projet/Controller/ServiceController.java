@@ -1,6 +1,8 @@
 package com.example.projet.projet.Controller;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.projet.projet.Model.Services;
+import com.example.projet.projet.Model.ServiceEntity;
 import com.example.projet.projet.Service.ServiceService;
 
 
@@ -27,34 +29,34 @@ public class ServiceController {
         this.serviceService = serviceService;
     }
 
-    // @RequestMapping(path = "/services/all",method = RequestMethod.GET)
-    // @ResponseBody
-    // public List<Services> getServices(){
-    //     return serviceService.selectAll();
-    // } 
+    @RequestMapping(path = "/services/all",method = RequestMethod.GET)
+    @ResponseBody
+    public List<ServiceEntity> getServices(){
+        return serviceService.selectAll();
+    } 
 
 
-    @GetMapping("/services/all")
-public String viewHomePage(Model model) {
-model.addAttribute("allServices", serviceService.selectAll());
-return "index";
-}
+//     @GetMapping("/services/all")
+// public String viewHomePage(Model model) {
+// model.addAttribute("allServices", serviceService.selectAll());
+// return "display-services";
+// }
 
     // similaire a POSTMAPPING
     @RequestMapping(path = "/services/add",method = RequestMethod.POST)
     @ResponseBody
     public String saveService(Model model){
-        model.addAttribute("newService",new Services());
+        model.addAttribute("newService",new ServiceEntity());
         return "add-service";
     }
 
-    public Services saveService(@RequestBody Services service){
-        return serviceService.addService(service);
-    }
+    // public Services saveService(@RequestBody Services service){
+    //     return serviceService.addService(service);
+    // }
 
     @GetMapping("/services/{id}")
     @ResponseBody
-    public Services getServiceById(@PathVariable("id") Long serviceId){
+    public ServiceEntity getServiceById(@PathVariable("id") Long serviceId){
        return serviceService.getServiceById(serviceId);
     }
 
