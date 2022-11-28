@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.example.projet.projet.Model.ServiceEntity;
 
 @Repository
-public interface ServiceRepository extends CrudRepository<ServiceEntity,Long> {
+public interface ServiceRepository extends CrudRepository<ServiceEntity,Integer> {
   
     
 }

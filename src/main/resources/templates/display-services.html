@@ -1,15 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.thymleaf.org" lang="en">
 
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Display services</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
+    <title>List Services</title>
 </head>
 
 <body>
-    hello
+    <div class="container my-2">
+        <h1>All Services</h1>
+        <button href="display-services.html" class="btn btn-danger">
+        All services
+      </button>
+    </div>
+
+    <div>
+        <div class="container">
+            <div class="row row-cols-3">
+                <div class="col card" th:each="service:${allServices}">
+                    <img src="..." class="card-img-top" alt="..." />
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${service.Nom}"></h5>
+                        <p class="card-text" th:text="${service.Description}">
+                            Some quick example text to build on the card title and make up the bulk of the card's content.
+                        </p>
+                        <a href="#" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <table style="width: 80%" class="table table-striped table-responsive-md">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Location</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="service:${allServices}">
+                    <td th:text="${service.id}"></td>
+                    <td th:text="${service.Nom}"></td>
+                    <td th:text="${service.Prix}"></td>
+                    <!-- <td>
+                        <a th:href="@{/showFormForUpdate/{id}(id=${client.id})}" class="btn btn-primary">Update</a
+              >
+
+              <a
+                th:href="@{/deleteClient/{id}(id=${client.id})}"
+                class="btn btn-danger"
+                >Delete</a
+              >
+            </td> -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 
 </html>

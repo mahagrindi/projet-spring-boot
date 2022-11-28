@@ -12,7 +12,6 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.Data;
 
-
 @Data
 @Entity
 @JsonIdentityInfo(property = "id",generator = ObjectIdGenerators.PropertyGenerator.class)

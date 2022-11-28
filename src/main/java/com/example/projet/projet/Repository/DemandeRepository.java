@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.example.projet.projet.Model.DemandeEntity;
 
-public interface DemandeRepository extends CrudRepository<DemandeEntity,Long> {
+public interface DemandeRepository extends CrudRepository<DemandeEntity,Integer> {
     
 }

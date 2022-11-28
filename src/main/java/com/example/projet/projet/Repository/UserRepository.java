@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.example.projet.projet.Model.UserEntity;
 
-public interface UserRepository extends CrudRepository<UserEntity,Long> {
+public interface UserRepository extends CrudRepository<UserEntity,Integer> {
     
 }

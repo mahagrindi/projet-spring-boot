@@ -1,6 +1,8 @@
 package com.example.projet.projet.Model;
 
 import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,12 +24,9 @@ public class CategorieEntity {
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 private int id;
 
+@Column(name = "Libelle", nullable = false)
 private String Libelle;
 
-
-// @OneToMany(targetEntity = UserEntity.class, mappedBy = "id",
-// orphanRemoval = false, fetch = FetchType.LAZY)
-// private Set<ServiceEntity> service;
 
 
 
@@ -39,10 +38,6 @@ private String Libelle;
 
  
 
-
-// @OneToMany(targetEntity = TechnicienEntity.class, mappedBy = "id",
-// orphanRemoval = false, fetch = FetchType.LAZY)
-// private Set<TechnicienEntity> technicien;
 
 
 
