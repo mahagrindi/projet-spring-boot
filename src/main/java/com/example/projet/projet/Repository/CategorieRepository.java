@@ -2,8 +2,8 @@ package com.example.projet.projet.Repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.example.projet.projet.Model.Categories;
+import com.example.projet.projet.Model.CategorieEntity;
 
-public interface CategorieRepository extends CrudRepository<Categories,Long> {
+public interface CategorieRepository extends CrudRepository<CategorieEntity,Integer> {
     
 }
