@@ -15,48 +15,31 @@ import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-
 @Data
 @Entity
-@JsonIdentityInfo(property = "id",generator = ObjectIdGenerators.PropertyGenerator.class)
-@Table (name = "Services")
+@JsonIdentityInfo(property = "id", generator = ObjectIdGenerators.PropertyGenerator.class)
+@Table(name = "Services")
 public class ServiceEntity {
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-private String Nom;
-private double Prix;
-private String Description;
-private String Image;
+    private String Nom;
+    private double Prix;
+    private String Description;
+    private String Image;
 
+    // @ManyToMany(fetch = FetchType.LAZY,
+    // cascade = {
+    // CascadeType.PERSIST,
+    // CascadeType.MERGE
+    // },
+    // mappedBy = "Services")
 
+    @ManyToOne
+    private CategorieEntity categorie;
 
-// @ManyToMany(fetch = FetchType.LAZY,
-// cascade = {
-//     CascadeType.PERSIST,
-//     CascadeType.MERGE
-// },
-// mappedBy = "Services")
-
-@ManyToOne
-private CategorieEntity categorie;
-
-@OneToMany(mappedBy = "service", targetEntity = DemandeServiceEntity.class)
-List<DemandeServiceEntity> demandes_services;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    @OneToMany(mappedBy = "service", targetEntity = DemandeServiceEntity.class)
+    List<DemandeServiceEntity> demandes_services;
 
 }

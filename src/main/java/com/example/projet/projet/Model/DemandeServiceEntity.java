@@ -14,20 +14,19 @@ import lombok.Data;
 
 @Data
 @Entity
-@JsonIdentityInfo(property = "id",generator = ObjectIdGenerators.PropertyGenerator.class)
-@Table (name = "Demande_service")
+@JsonIdentityInfo(property = "id", generator = ObjectIdGenerators.PropertyGenerator.class)
+@Table(name = "Demande_service")
 public class DemandeServiceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @ManyToOne
+    private ServiceEntity service;
 
-@ManyToOne
-private ServiceEntity service;
+    @ManyToOne
+    private DemandeEntity demande;
 
-@ManyToOne
-private DemandeEntity demande;
-
-@ManyToOne
-private TechnicienEntity technicien;
+    @ManyToOne
+    private TechnicienEntity technicien;
 }

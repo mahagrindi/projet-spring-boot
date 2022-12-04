@@ -15,36 +15,29 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table (name = "Demandes")
+@Table(name = "Demandes")
 public class DemandeEntity {
-  
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-private int id;
 
-@Column(name = "Prix_Total", nullable = false)
-private Double Prix_Total;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-@Column(name = "Description", length = 250, nullable = false)
-private String Description;
+    @Column(name = "Prix_Total", nullable = false)
+    private Double Prix_Total;
 
-@Column(name = "Date", nullable = false)
-private LocalDate  Date;
+    @Column(name = "Description", length = 250, nullable = false)
+    private String Description;
 
-@Column(name = "Heure", nullable = false)
-private String  Heure;
+    @Column(name = "Date", nullable = false)
+    private LocalDate Date;
 
-@ManyToOne
-private UserEntity user;
+    @Column(name = "Heure", nullable = false)
+    private String Heure;
 
+    @ManyToOne
+    private UserEntity user;
 
-@OneToMany(mappedBy = "demande", targetEntity = DemandeServiceEntity.class)
-List<DemandeServiceEntity> demandes_services;
-
-
-
-
-
-
+    @OneToMany(mappedBy = "demande", targetEntity = DemandeServiceEntity.class)
+    List<DemandeServiceEntity> demandes_services;
 
 }

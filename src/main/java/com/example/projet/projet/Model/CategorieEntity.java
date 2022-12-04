@@ -17,31 +17,20 @@ import lombok.Data;
 
 @Data
 @Entity
-@JsonIdentityInfo(property = "id",generator = ObjectIdGenerators.PropertyGenerator.class)
-@Table (name = "Categories")
+@JsonIdentityInfo(property = "id", generator = ObjectIdGenerators.PropertyGenerator.class)
+@Table(name = "Categories")
 public class CategorieEntity {
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-@Column(name = "Libelle", nullable = false)
-private String Libelle;
+    @Column(name = "Libelle", nullable = false)
+    private String Libelle;
 
+    @OneToMany(mappedBy = "categorie", targetEntity = ServiceEntity.class)
+    List<ServiceEntity> services;
 
-
-
-@OneToMany(mappedBy = "categorie",targetEntity = ServiceEntity.class)
- List<ServiceEntity> services;
-
- @OneToMany(mappedBy = "categorie",targetEntity = TechnicienEntity.class)
- List<TechnicienEntity> techniciens;
-
- 
-
-
-
-
-
-
+    @OneToMany(mappedBy = "categorie", targetEntity = TechnicienEntity.class)
+    List<TechnicienEntity> techniciens;
 
 }

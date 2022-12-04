@@ -1,6 +1,5 @@
 package com.example.projet.projet.Controller;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,80 +11,73 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.example.projet.projet.Model.ServiceEntity;
 import com.example.projet.projet.Service.ServiceService;
-
 
 @Controller
 public class ServiceController {
 
     private ServiceService serviceService;
-    
-    //pour l injection
+
+    // pour l injection
     @Autowired
-    public ServiceController(ServiceService serviceService){
+    public ServiceController(ServiceService serviceService) {
         this.serviceService = serviceService;
     }
 
     // @RequestMapping(path = "/services/all",method = RequestMethod.GET)
     // @ResponseBody
     // public List<ServiceEntity> getServices(){
-    //     return serviceService.selectAll();
-    // } 
+    // return serviceService.selectAll();
+    // }
 
     @GetMapping(value = "/services")
-    public List<ServiceEntity> getServ(){
+    public List<ServiceEntity> getServ() {
         return serviceService.selectAll();
     }
 
     // @PostMapping("/save")
-    // public ResponseEntity<ServiceEntity> saveServ(@RequestBody ServiceEntity servObj){
-    //     serviceService.addService(servObj);
-    //     return new ResponseEntity<>(HttpStatus.CREATED);
+    // public ResponseEntity<ServiceEntity> saveServ(@RequestBody ServiceEntity
+    // servObj){
+    // serviceService.addService(servObj);
+    // return new ResponseEntity<>(HttpStatus.CREATED);
     // }
 
     @GetMapping("/services/all")
-public String viewHomePage(Model model) {
-model.addAttribute("allServices", serviceService.selectAll());
-return "display-services";
-}
+    public String viewHomePage(Model model) {
+        model.addAttribute("allServices", serviceService.selectAll());
+        return "display-services";
+    }
 
     // similaire a POSTMAPPING
-    @RequestMapping(path = "/services/add",method = RequestMethod.POST)
+    @RequestMapping(path = "/services/add", method = RequestMethod.POST)
     @ResponseBody
     // public String saveService(Model model){
-    //     model.addAttribute("newService",new ServiceEntity());
-    //     return "add-service";
+    // model.addAttribute("newService",new ServiceEntity());
+    // return "add-service";
     // }
 
-    public ServiceEntity saveService(@RequestBody ServiceEntity service){
+    public ServiceEntity saveService(@RequestBody ServiceEntity service) {
         return serviceService.addService(service, service.getCategorie().getId());
     }
 
     @GetMapping("/services/{id}")
     @ResponseBody
-    public ServiceEntity getServiceById(@PathVariable("id") int serviceId){
-       return serviceService.getServiceById(serviceId);
+    public ServiceEntity getServiceById(@PathVariable("id") int serviceId) {
+        return serviceService.getServiceById(serviceId);
     }
 
-
-    @RequestMapping(path = "/services/delete/{id}",method = RequestMethod.DELETE)
+    @RequestMapping(path = "/services/delete/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public String deleteService(@PathVariable("id") int serviceId){
-    return "deleted";
+    public String deleteService(@PathVariable("id") int serviceId) {
+        return "deleted";
     }
-
 
     @ExceptionHandler(IllegalArgumentException.class)
     @ResponseBody
-    public String handleIllegalArgsException(IllegalArgumentException e){
-        return "Error in search :"+e.getMessage();
+    public String handleIllegalArgsException(IllegalArgumentException e) {
+        return "Error in search :" + e.getMessage();
     }
 
-
-   
-   
 }
