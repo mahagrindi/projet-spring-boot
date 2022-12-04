@@ -28,10 +28,12 @@ public List<ServiceEntity> selectAll(){
     return  (List<ServiceEntity>) serviceRepository.findAll();
 }
 
-public ServiceEntity addService(ServiceEntity service, int CatID){
-    System.out.println("\n catservice"+catRepo.findById(CatID).get());
+public ServiceEntity addService(ServiceEntity service,int CatID){
+    // System.out.println("\n catservice"+catRepo.findById(CatID).get());
     CategorieEntity categorie = catRepo.findById(CatID).get();
-    System.out.println("categorie"+categorie);
+    // List<CategorieEntity> categories = (List<CategorieEntity>) catRepo.findAll();
+
+    // System.out.println("service"+service);
     service.setCategorie(categorie);
     return serviceRepository.save(service);
  }
