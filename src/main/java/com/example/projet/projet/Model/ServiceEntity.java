@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 import lombok.Builder;
 import lombok.Data;
@@ -34,13 +35,13 @@ public class ServiceEntity {
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 private int id;
 
-@Column(nullable = false)
+
 private String Nom;
-@Column(nullable = false)
+
 private double Prix;
-@Column(nullable = false)
+
 private String Description;
- @Column(nullable = false)
+
 private String Image;
 
 

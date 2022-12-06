@@ -46,7 +46,8 @@
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <div th:each="service:${allServices}" class="col mb-md-3 mb-sm-1">
                 <div class="card">
-                    <img th:src="@{${'/images/' + service.Image }}" class="card-img-top img-responsive" alt="..." />
+                    <img th:src="@{${'/service-photos/' + service.Image }}" class="card-img-top img-responsive" alt="..." />
+                    <!-- <img src="/service-photos/6518.png" class="card-img-top img-responsive" alt="..." /> -->
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <h5 class="card-title text-truncate" style="width: 75%" th:text="${service.Nom}"></h5>
@@ -55,6 +56,7 @@
                 ></b>
                         </div>
                         <p class="card-text" th:text="${service.Description}"></p>
+                        <p class="card-text" th:text="${service.categorie.Libelle}"></p>
                         <a href="details-service.html" th:href="@{/services/{id}(id=${service.id})}" class="btn btn-primary">View Details</a
               >
             </div>

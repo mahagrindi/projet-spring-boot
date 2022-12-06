@@ -1,6 +1,8 @@
 package com.example.projet.projet.Controller;
 
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -19,11 +21,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.projet.projet.Model.ServiceEntity;
 import com.example.projet.projet.Service.CategorieService;
 import com.example.projet.projet.Service.ServiceService;
+import com.example.projet.projet.configs.FileUploadUtil;
 import com.example.projet.projet.views.ServiceView;
+
+import org.springframework.util.StringUtils;
 
 
 @Controller
@@ -73,11 +79,25 @@ return "display-services";
 
 
     @RequestMapping(path = "/services/add",method = RequestMethod.POST)
-    public String saveService(@ModelAttribute ServiceView service ,BindingResult result){
-        if(result.hasErrors()){
-            return "add-service";
-        }
+    public String saveService(@ModelAttribute("newService") @Valid ServiceView service ,BindingResult result,@RequestParam("image") MultipartFile multipartFile) throws IOException{
+        
+        // if(result.hasErrors()){
+        //     return "add-service";
+        // }
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        service.setImage(fileName);
         serviceService.addService(service.buildEntity(), service.getId_categorie());
+        String uploadDir = "service-photos/";
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile); 
+        // if (!multipartFile.isEmpty()){
+        //     String orgFileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        //     String ext = orgFileName.substring(orgFileName.lastIndexOf("."));
+        //     String fileName = "voiture-"+service.getNom()+ext;
+        //     String uploadDir = "services-photos/";
+        //     FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+        //     service.setImage("/"+uploadDir+fileName);
+        //     serviceService.addService(service.buildEntity(), service.getId_categorie());
+        // }
         return "redirect:/services/all";
         // return serviceService.addService(service, 1);
 
@@ -111,7 +131,7 @@ return "display-services";
     @ExceptionHandler(IllegalArgumentException.class)
     @ResponseBody
     public String handleIllegalArgsException(IllegalArgumentException e){
-        return "Error in search :"+e.getMessage();
+        return e.getMessage();
     }
 
 
