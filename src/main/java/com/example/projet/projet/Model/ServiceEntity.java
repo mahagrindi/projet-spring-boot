@@ -18,6 +18,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import com.example.projet.projet.Controller.AllArgsConstructor;
+import com.example.projet.projet.views.ServiceView;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -67,6 +68,17 @@ public ServiceEntity(int id, String nom, double prix, String description, String
     Image = image;
     this.categorie = categorie;
     this.demandes_services = demandes_services;
+}
+
+public ServiceView toView(){
+    return ServiceView.builder()
+    .idService(this.id)
+    .Nom(this.Nom)
+    .Description(this.Description)
+    .Image(this.Image)
+    .Prix(this.Prix)
+    .id_categorie(this.categorie.getId())
+    .build(); 
 }
 
 

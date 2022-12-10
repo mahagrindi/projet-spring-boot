@@ -68,18 +68,27 @@ model.addAttribute("allServices", serviceService.selectAll());
 return "display-services";
 }
 
-    // similaire a POSTMAPPING
+ @GetMapping("/services/{id}")
+    public String viewDetailsService(@PathVariable("id") int serviceId,Model model) {
+        model.addAttribute("detailService", serviceService.getServiceById(serviceId));
+        return "details-service";
+        }
+ 
     
     @GetMapping("/add")
     public String saveService(Model model){
-        model.addAttribute("newService",new ServiceView());
+        model.addAttribute("service",new ServiceView());
         model.addAttribute("categories", categorieService.findAll());
         return "add-service";
     }
-
-
-    @RequestMapping(path = "/services/add",method = RequestMethod.POST)
-    public String saveService(@ModelAttribute("newService") @Valid ServiceView service ,BindingResult result,@RequestParam("image") MultipartFile multipartFile) throws IOException{
+    @GetMapping("/update/{id}")
+public String updateUser(@PathVariable("id") int id, Model model) {
+    model.addAttribute("service", serviceService.getServiceById(id).toView());
+    model.addAttribute("categories", categorieService.findAll());
+    return "add-service";
+}
+    @RequestMapping(path = "/add",method = RequestMethod.POST)
+    public String saveService(@ModelAttribute("service") @Valid ServiceView service ,BindingResult result,@RequestParam("image") MultipartFile multipartFile) throws IOException{
         
         // if(result.hasErrors()){
         //     return "add-service";
@@ -89,42 +98,19 @@ return "display-services";
         serviceService.addService(service.buildEntity(), service.getId_categorie());
         String uploadDir = "service-photos/";
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile); 
-        // if (!multipartFile.isEmpty()){
-        //     String orgFileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-        //     String ext = orgFileName.substring(orgFileName.lastIndexOf("."));
-        //     String fileName = "voiture-"+service.getNom()+ext;
-        //     String uploadDir = "services-photos/";
-        //     FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-        //     service.setImage("/"+uploadDir+fileName);
-        //     serviceService.addService(service.buildEntity(), service.getId_categorie());
-        // }
+       
         return "redirect:/services/all";
-        // return serviceService.addService(service, 1);
 
     }
 
-    @GetMapping("/services/{id}")
-    @ResponseBody
-    public String viewDetailsService(@PathVariable("id") int serviceId,Model model) {
-        model.addAttribute("detailService", serviceService.getServiceById(serviceId));
-        return "details-service";
-        }
-
-    // @GetMapping("/services/{id}")
-    // @ResponseBody
-    // public ServiceEntity viewDetailsService(@PathVariable("id") int serviceId){
-    //     // return serviceService.addService(service, service.getCategorie().getId());
-    //     return serviceService.getServiceById(serviceId);
-
-    // }
-   
 
 
 
-    @RequestMapping(path = "/services/delete/{id}",method = RequestMethod.DELETE)
-    @ResponseBody
-    public String deleteService(@PathVariable("id") int serviceId){
-    return "deleted";
+
+    @RequestMapping(path = "/services/delete/{id}")
+       public String deleteService(Model model,@PathVariable("id") int serviceId){
+        serviceService.deleteService(serviceId);
+    return "redirect:/services/all";
     }
 
 

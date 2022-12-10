@@ -29,11 +29,9 @@ public List<ServiceEntity> selectAll(){
 }
 
 public ServiceEntity addService(ServiceEntity service,int CatID){
-    // System.out.println("\n catservice"+catRepo.findById(CatID).get());
     CategorieEntity categorie = catRepo.findById(CatID).get();
     // List<CategorieEntity> categories = (List<CategorieEntity>) catRepo.findAll();
 
-    // System.out.println("service"+service);
     service.setCategorie(categorie);
     return serviceRepository.save(service);
  }

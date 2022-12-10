@@ -23,14 +23,7 @@
             text-overflow: ellipsis;
         } */
     </style>
-    <!-- <div class="h-50 d-inline-block">
-        <div class="card bg-dark text-white">
-            <img src="/images/fond.jpeg" class="card-img" alt="..." />
-            <div class="card-img-overlay">
-                <h1 class="card-title text-center">All Services</h1>
-            </div>
-        </div>
-    </div> -->
+
     <div class="w-100 my-4 p-3" style="background-color: #eee">
         <h1 class="card-title text-center p-3">All Services</h1>
     </div>
@@ -43,6 +36,7 @@
         </div>
     </div>
     <div class="container">
+        <a th:href="@{/add}" class="btn btn-secondary">Add new Service</a>
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <div th:each="service:${allServices}" class="col mb-md-3 mb-sm-1">
                 <div class="card">
@@ -58,6 +52,17 @@
                         <p class="card-text" th:text="${service.Description}"></p>
                         <p class="card-text" th:text="${service.categorie.Libelle}"></p>
                         <a href="details-service.html" th:href="@{/services/{id}(id=${service.id})}" class="btn btn-primary">View Details</a
+              >
+              <a
+                href="add-service.html"
+                th:href="@{/update/{id}(id=${service.id})}"
+                class="btn btn-success"
+                >Update</a
+              >
+              <a
+                th:href="@{/services/delete/{id}(id=${service.id})}"
+                class="btn btn-danger"
+                >delete</a
               >
             </div>
           </div>

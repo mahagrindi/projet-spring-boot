@@ -15,11 +15,14 @@
         <div class="row no-gutters">
             <div class="col-md-9 offset-md-2 wrap-about ftco-animate">
                 <div class="heading-section heading-section-white pl-md-5">
-                    <h1 class="text-center">
-                        <span class="subheading">Voiture Info</span>
+                    <h1 class="text-center mb-3">
+                        <span class="subheading">Service Info</span>
                     </h1>
-                    <form action="/services/add" enctype="multipart/form-data" method="post" class="bg-light p-5 row g-3" th:object="${newService}">
+                    <form action="/add" enctype="multipart/form-data" method="post" class="bg-light p-5 row g-3" th:object="${service}">
+                        <input type="text" class="form-control" placeholder="id" th:field="*{idService}" hidden />
+
                         <div class="mb-3">
+                            <!-- <input type="text" class="form-control" th:field="*{id}" hidden /> -->
                             <label for="validationDefault01" class="form-label">Nom</label>
                             <input type="text" class="form-control" placeholder="Nom service" th:field="*{Nom}" required />
                         </div>
@@ -49,7 +52,8 @@
 
                         <div class="mb-3">
                             <label class="form-label">categories</label>
-                            <select class="form-select" th:field="*{id_categorie}" name="categories" required>
+                            <select class="form-select" th:field="*{id_categorie} " name="categories" required>
+                  <!-- <select class="form-select" th:field="*{categorie} " name="categories" required> -->
                   <option
                     th:each="categorie:${categories}"
                     th:value="${categorie.id}"
@@ -65,7 +69,7 @@
                     </form>
 
                     <!-- 
-                    <form action="/services/add" enctype="multipart/form-data" method="post" class="row g-3 bg-light p-5" th:object="${newService}" novalidate>
+                    <form action="/services/add" enctype="multipart/form-data" method="post" class="row g-3 bg-light p-5" th:object="${service}" novalidate>
                         <input type="text" class="form-control" placeholder="id" th:field="*{id}" hidden />
                         <input type="text" class="form-control" placeholder="id" th:field="*{image}" hidden />
 
