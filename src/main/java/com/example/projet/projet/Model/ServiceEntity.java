@@ -24,13 +24,12 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-
 @Builder
 @AllArgsConstructor
 @Data
 @Entity
-@JsonIdentityInfo(property = "id",generator = ObjectIdGenerators.PropertyGenerator.class)
-@Table (name = "Services")
+@JsonIdentityInfo(property = "id", generator = ObjectIdGenerators.PropertyGenerator.class)
+@Table(name = "Services")
 public class ServiceEntity {
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)

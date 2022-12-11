@@ -37,12 +37,12 @@ public class ServiceController {
 
     private ServiceService serviceService;
     private CategorieService categorieService;
-    
-    //pour l injection
+
+    // pour l injection
     @Autowired
-    public ServiceController(ServiceService serviceService,CategorieService categorieService){
+    public ServiceController(ServiceService serviceService, CategorieService categorieService) {
         this.serviceService = serviceService;
-        this.categorieService =categorieService;
+        this.categorieService = categorieService;
     }
 
 
@@ -94,14 +94,10 @@ return "display-services";
     return "redirect:/services/all";
     }
 
-
     @ExceptionHandler(IllegalArgumentException.class)
     @ResponseBody
     public String handleIllegalArgsException(IllegalArgumentException e){
         return e.getMessage();
     }
 
-
-   
-   
 }

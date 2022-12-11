@@ -21,36 +21,26 @@ import lombok.ToString;
 
 @Data
 @Entity
-@JsonIdentityInfo(property = "id",generator = ObjectIdGenerators.PropertyGenerator.class)
-@Table (name = "Categories")
+@JsonIdentityInfo(property = "id", generator = ObjectIdGenerators.PropertyGenerator.class)
+@Table(name = "Categories")
 public class CategorieEntity {
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-@Column(name = "Libelle", nullable = false)
-private String Libelle;
+    @Column(name = "Libelle", nullable = false)
+    private String Libelle;
 
+    @JsonManagedReference
+    @OneToMany(mappedBy = "categorie", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true, targetEntity = ServiceEntity.class)
+    List<ServiceEntity> services;
 
+    @OneToMany(mappedBy = "categorie", fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = TechnicienEntity.class)
+    List<TechnicienEntity> techniciens;
 
-@JsonManagedReference
-@OneToMany(mappedBy = "categorie",cascade = CascadeType.ALL, fetch=FetchType.LAZY, orphanRemoval = true,targetEntity = ServiceEntity.class)
- List<ServiceEntity> services;
-
- @OneToMany(mappedBy = "categorie",fetch = FetchType.LAZY,cascade = CascadeType.ALL,targetEntity = TechnicienEntity.class)
- List<TechnicienEntity> techniciens;
-
-@Override
-public String toString() {
-    return "CategorieEntity [id=" + id + ", Libelle=" + Libelle + "]";
-}
-
- 
-
-
-
-
-
-
+    @Override
+    public String toString() {
+        return "CategorieEntity [id=" + id + ", Libelle=" + Libelle + "]";
+    }
 
 }

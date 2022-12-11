@@ -1,6 +1,5 @@
 package com.example.projet.projet.Model;
 
-
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import lombok.Data;
 
 @Data
 @Entity
@@ -21,39 +21,34 @@ public class RoleEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name = "Libelle", length = 250, nullable = false, unique = true)
+    private String Libelle;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "role", targetEntity = UserEntity.class)
+    List<UserEntity> users;
 
-@Column(name = "Libelle", length = 250, nullable = false, unique = true)
-private String Libelle;
+    public int getId() {
+        return id;
+    }
 
-@OneToMany(mappedBy = "role", targetEntity = UserEntity.class)
-List<UserEntity> users;
+    public void setId(int id) {
+        this.id = id;
+    }
 
-public int getId() {
-    return id;
-}
+    public String getLibelle() {
+        return Libelle;
+    }
 
-public void setId(int id) {
-    this.id = id;
-}
+    public void setLibelle(String libelle) {
+        Libelle = libelle;
+    }
 
-public String getLibelle() {
-    return Libelle;
-}
+    public List<UserEntity> getUsers() {
+        return users;
+    }
 
-public void setLibelle(String libelle) {
-    Libelle = libelle;
-}
-
-public List<UserEntity> getUsers() {
-    return users;
-}
-
-public void setUsers(List<UserEntity> users) {
-    this.users = users;
-}
-
-
-
-  
+    public void setUsers(List<UserEntity> users) {
+        this.users = users;
+    }
 
 }

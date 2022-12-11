@@ -12,7 +12,7 @@ import com.example.projet.projet.Repository.ServiceRepository;
 
 @Service
 public class ServiceService {
-    
+
     private ServiceRepository serviceRepository;
     @Autowired
     private CategorieRepository catRepo;
