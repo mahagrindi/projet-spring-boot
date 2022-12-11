@@ -46,18 +46,16 @@ public class UserEntity {
     @OneToMany(mappedBy = "user", targetEntity = DemandeEntity.class)
     private List<DemandeEntity> demande;
 
-
-
     @OneToOne(mappedBy = "userEntity")
     private TechnicienEntity technicienEntity;
 
     @Override
     public String toString() {
         return "UserEntity [id=" + id + ", Name=" + Name + ", Prenom=" + Prenom + ", Email=" + Email + ", Phone="
-                + Phone + ", Adresse=" + Adresse + ", Password=" + Password + ", role=" + role.getLibelle()
-                + ", demande="
+                + Phone + ", Adresse=" + Adresse + ", Password=" + Password + ", role=" + role.getId() + ", demande="
                 + demande
-                + "]";
+                + ", technicienEntity=" + (technicienEntity != null ? technicienEntity.getId() : null) + "]";
+
     }
 
 }

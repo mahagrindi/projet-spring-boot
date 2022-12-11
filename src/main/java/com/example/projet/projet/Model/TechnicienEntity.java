@@ -43,4 +43,11 @@ public class TechnicienEntity {
     @OneToMany(mappedBy = "technicien", targetEntity = DemandeServiceEntity.class)
     List<DemandeServiceEntity> demandes_services;
 
+    @Override
+    public String toString() {
+        return "TechnicienEntity [id=" + id + ", Note=" + Note + ", userEntity=" + userEntity
+                + ", categorie="
+                + categorie + ", demandes_services=" + demandes_services + "]";
+    }
+
 }

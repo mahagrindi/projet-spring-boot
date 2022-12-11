@@ -24,8 +24,6 @@ public class UserService {
         return userRepository.findAll();
     }
 
-
-
     public UserEntity addUser(UserEntity user) {
         // RoleEntity re = new RoleEntity();
         // // RoleEntity role = (RoleEntity)roleRepository.findById(rolId).get();
@@ -41,7 +39,6 @@ public class UserService {
         // // // role.setId(rolId);
         // // (user.getRole()).setLibelle("user");
         // user.setRole(re);
-        System.out.println("user service \n " + user);
         return userRepository.save(user);
     }
 
