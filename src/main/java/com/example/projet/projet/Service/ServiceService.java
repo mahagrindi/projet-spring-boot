@@ -37,7 +37,7 @@ public ServiceEntity addService(ServiceEntity service,int CatID){
  }
 
  public ServiceEntity getServiceById(int id){
-    return serviceRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Client ID not found"));
+    return serviceRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("service ID not found"));
 }
 
 public String deleteService(int id) {

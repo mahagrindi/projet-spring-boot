@@ -51,6 +51,9 @@ private List<DemandeEntity> demande;
 
 
 
+
+
+
 // @ManyToOne(fetch = FetchType.LAZY)
 // @JoinColumn(name = "role_id", insertable = false,
 // updatable = false)

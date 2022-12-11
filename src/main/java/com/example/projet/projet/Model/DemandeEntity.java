@@ -1,5 +1,6 @@
 package com.example.projet.projet.Model;
 
+import java.sql.Time;
 import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.Column;
@@ -11,10 +12,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Builder
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table (name = "Demandes")
 public class DemandeEntity {
   
@@ -22,24 +31,34 @@ public class DemandeEntity {
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 private int id;
 
-@Column(name = "Prix_Total", nullable = false)
-private Double Prix_Total;
+@Column(name = "prix_total", nullable = false)
+private Double prix_total;
 
-@Column(name = "Description", length = 250, nullable = false)
-private String Description;
+@Column(name = "description", length = 250, nullable = false)
+private String description;
 
-@Column(name = "Date", nullable = false)
-private LocalDate  Date;
 
-@Column(name = "Heure", nullable = false)
-private String  Heure;
+@DateTimeFormat(pattern = "yyyy-MM-dd")
+@Column(name = "date", nullable = false)
+private String  date;
+
+@Column(name = "heure", nullable = false)
+private String  heure;
+
+
+@Column(name = "quantite", columnDefinition = "integer default 1", nullable = false)
+private int  qte;
+
 
 @ManyToOne
 private UserEntity user;
 
+@ManyToOne
+private ServiceEntity service;
 
-@OneToMany(mappedBy = "demande", targetEntity = DemandeServiceEntity.class)
-List<DemandeServiceEntity> demandes_services;
+
+// @OneToMany(mappedBy = "demande", targetEntity = DemandeServiceEntity.class)
+// List<DemandeServiceEntity> demandes_services;
 
 
 

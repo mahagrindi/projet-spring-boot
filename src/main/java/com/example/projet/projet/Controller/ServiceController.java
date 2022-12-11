@@ -45,24 +45,8 @@ public class ServiceController {
         this.categorieService =categorieService;
     }
 
-    // @RequestMapping(path = "/services/all",method = RequestMethod.GET)
-    // @ResponseBody
-    // public List<ServiceEntity> getServices(){
-    //     return serviceService.selectAll();
-    // } 
 
-    @GetMapping(value = "/services")
-    public List<ServiceEntity> getServ(){
-        return serviceService.selectAll();
-    }
-
-    // @PostMapping("/save")
-    // public ResponseEntity<ServiceEntity> saveServ(@RequestBody ServiceEntity servObj){
-    //     serviceService.addService(servObj);
-    //     return new ResponseEntity<>(HttpStatus.CREATED);
-    // }
-
-    @GetMapping("/services/all")
+ @GetMapping("/services/all")
 public String viewHomePage(Model model) {
 model.addAttribute("allServices", serviceService.selectAll());
 return "display-services";
@@ -72,7 +56,7 @@ return "display-services";
     public String viewDetailsService(@PathVariable("id") int serviceId,Model model) {
         model.addAttribute("detailService", serviceService.getServiceById(serviceId));
         return "details-service";
-        }
+    }
  
     
     @GetMapping("/add")
@@ -81,35 +65,32 @@ return "display-services";
         model.addAttribute("categories", categorieService.findAll());
         return "add-service";
     }
-    @GetMapping("/update/{id}")
-public String updateUser(@PathVariable("id") int id, Model model) {
-    model.addAttribute("service", serviceService.getServiceById(id).toView());
-    model.addAttribute("categories", categorieService.findAll());
-    return "add-service";
-}
+
+
     @RequestMapping(path = "/add",method = RequestMethod.POST)
     public String saveService(@ModelAttribute("service") @Valid ServiceView service ,BindingResult result,@RequestParam("image") MultipartFile multipartFile) throws IOException{
-        
-        // if(result.hasErrors()){
-        //     return "add-service";
-        // }
+    
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         service.setImage(fileName);
         serviceService.addService(service.buildEntity(), service.getId_categorie());
         String uploadDir = "service-photos/";
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile); 
-       
         return "redirect:/services/all";
 
     }
 
 
-
+    @GetMapping("/update/{id}")
+    public String updateUser(@PathVariable("id") int id, Model model) {
+    model.addAttribute("service", serviceService.getServiceById(id).toView());
+    model.addAttribute("categories", categorieService.findAll());
+    return "add-service";
+    }
 
 
     @RequestMapping(path = "/services/delete/{id}")
-       public String deleteService(Model model,@PathVariable("id") int serviceId){
-        serviceService.deleteService(serviceId);
+    public String deleteService(Model model,@PathVariable("id") int serviceId){
+    serviceService.deleteService(serviceId);
     return "redirect:/services/all";
     }
 

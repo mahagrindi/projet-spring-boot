@@ -52,23 +52,32 @@ private String Image;
 @ManyToOne(targetEntity = CategorieEntity.class, fetch = FetchType.LAZY)
 private CategorieEntity categorie;
 
-@OneToMany(mappedBy = "service", targetEntity = DemandeServiceEntity.class)
-List<DemandeServiceEntity> demandes_services;
+// @OneToMany(mappedBy = "service", targetEntity = DemandeServiceEntity.class)
+// List<DemandeServiceEntity> demandes_services;
+
+
+@OneToMany(mappedBy = "service",targetEntity = DemandeEntity.class)
+private List<DemandeEntity> demande;
 
 public ServiceEntity() {
     this.categorie = new CategorieEntity();
 }
 
+
+
 public ServiceEntity(int id, String nom, double prix, String description, String image, CategorieEntity categorie,
-        List<DemandeServiceEntity> demandes_services) {
+        List<DemandeEntity> demande) {
     this.id = id;
     Nom = nom;
     Prix = prix;
     Description = description;
     Image = image;
     this.categorie = categorie;
-    this.demandes_services = demandes_services;
+    // this.demandes_services = demandes_services;
+    this.demande = demande;
 }
+
+
 
 public ServiceView toView(){
     return ServiceView.builder()

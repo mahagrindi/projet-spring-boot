@@ -1,6 +1,5 @@
 package com.example.projet.projet.views;
 
-import com.example.projet.projet.Controller.AllArgsConstructor;
 import com.example.projet.projet.Model.ServiceEntity;
 
 import lombok.Builder;
