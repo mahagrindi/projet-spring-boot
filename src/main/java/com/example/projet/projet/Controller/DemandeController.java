@@ -1,5 +1,7 @@
 package com.example.projet.projet.Controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.projet.projet.Model.DemandeEntity;
+import com.example.projet.projet.Model.UserEntity;
 import com.example.projet.projet.Service.DemandeService;
 import com.example.projet.projet.Service.ServiceService;
 import com.example.projet.projet.Service.UserService;
@@ -54,8 +57,11 @@ public String saveDemande(Model model, @PathVariable("id") int serviceId){
 
 
 @PostMapping("/demande/add")
-public String saveService(@ModelAttribute("demande") @Valid DemandeView demande){
-    demandeService.addDemande(demande.buildEntity(), 1, demande.getId_service());
+public String saveService(@ModelAttribute("demande") @Valid DemandeView demande,HttpServletRequest request
+){
+    UserEntity user = (UserEntity) request.getSession().getAttribute("client");
+    System.out.println("affichage session"+user);
+    demandeService.addDemande(demande.buildEntity(), user.getId(), demande.getId_service());
     return "redirect:/demandes/all";
 }
 
