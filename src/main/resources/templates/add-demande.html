@@ -25,10 +25,10 @@
                 >
               </div>
 
-              <!-- <div th:object="${service}">
+              <div th:object="${service}">
                 <p th:text="${service.Nom}"></p>
                 <p th:text="${service.id}"></p>
-              </div> -->
+              </div>
 
               <div class="mb-3">
                 <label for="validationDefault03" class="form-label">Desc</label>
@@ -49,19 +49,11 @@
                             <input type="number" class="form-control" value="1" placeholder="Nom service" aria-describedby="emailHelp" th:field="*{qte}" required />
                         </div>
 
-                        <div th:object="${service}">
-                            <p th:text="${service.Nom}"></p>
-                            <p th:text="${service.id}"></p>
-                        </div>
-
-                        <select th:field="*{id_service}" name="id service">
-                <!-- <option
-                  th:object="${service}"
+                        <select class="form-select" th:field="*{id_service}" name="categories" required hidden>
+                <option
                   th:value="${service.id}"
-                  th:text="${service.Nom}"
-                ></option> -->
-                <option value="1">1</option>
-                <option value="2">2</option>
+                  th:text="${service.id}"
+                ></option>
               </select>
 
                         <div class="form-group text-center">

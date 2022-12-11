@@ -48,7 +48,6 @@ public String displayDemande(Model model){
 public String saveDemande(Model model, @PathVariable("id") int serviceId){
     model.addAttribute("demande", new DemandeView());
     model.addAttribute("service", serviceService.getServiceById(serviceId));
-    // model.addAttribute("user", userService.findAll());
     return "add-demande";
 }
 
