@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
+    <title>Add New Service</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row no-gutters">
+            <div class="col-md-9 offset-md-2 wrap-about ftco-animate">
+                <div class="heading-section heading-section-white pl-md-5">
+                    <h1 class="text-center">
+                        <span class="subheading">Voiture Info</span>
+                    </h1>
+                    <form action="/services/add" method="post" class="bg-light p-5 contact-form needs-validation" th:object="${newService}" novalidate>
+                        <!-- <input type="text" class="form-control" placeholder="id" th:field="*{id}" hidden /> -->
+
+                        <div class="mb-3">
+                            <label class="form-label">Nom</label>
+                            <input type="text" class="form-control" placeholder="Nom service" th:field="*{Nom}" required />
+                            <!-- <small th:if="${#fields.hasErrors('Nom')}" style="color: darkred" th:errors="*{Nom}"></small> -->
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('Nom')}"></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Desc</label>
+                            <input type="text" class="form-control" placeholder="Nom service" aria-describedby="emailHelp" th:field="*{Description}" required />
+                            <!-- <small th:if="${#fields.hasErrors('Nom')}" style="color: darkred" th:errors="*{Nom}"></small> -->
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Nom</label>
+                            <input type="text" class="form-control" placeholder="Nom service" aria-describedby="emailHelp" th:field="*{Image}" required />
+                            <!-- <small th:if="${#fields.hasErrors('Nom')}" style="color: darkred" th:errors="*{Nom}"></small> -->
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Nom</label>
+                            <input type="text" class="form-control" placeholder="Nom service" aria-describedby="emailHelp" th:field="*{Prix}" required />
+                            <small th:if="${#fields.hasErrors('Nom')}" style="color: darkred" th:errors="*{Nom}"></small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">categories</label>
+                            <select th:field="*{id_categorie}" name="categories" required>
+                  <option
+                    th:each="categorie:${categories}"
+                    th:value="${categorie.id}"
+                    th:text="${categorie.Libelle}"
+                  ></option>
+                </select>
+                            <input type="text" class="form-control" placeholder="Nom service" aria-describedby="emailHelp" th:field="*{Nom}" />
+                            <!-- <small th:if="${#fields.hasErrors('Nom')}" style="color: darkred" th:errors="*{Nom}"></small> -->
+                        </div>
+
+                        <div class="form-group text-center">
+                            <input type="submit" value="add new service" class="btn btn-primary py-3 px-5" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

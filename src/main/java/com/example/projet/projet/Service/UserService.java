@@ -24,15 +24,21 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public UserEntity addUser(UserEntity user, int rolId) {
-        System.out.println("hello in user service \n " + rolId);
-        // RoleEntity role = roleRepository.findById(rolId).get();
-        // System.out.println("role \n " + role);
-        RoleEntity role = new RoleEntity();
-        role.setId(rolId);
-        role.setLibelle("user");
-        user.setRole(role);
-
+    public UserEntity addUser(UserEntity user) {
+        // RoleEntity re = new RoleEntity();
+        // // RoleEntity role = (RoleEntity)roleRepository.findById(rolId).get();
+        // List<RoleEntity> roles = (List<RoleEntity>) roleRepository.findAll();
+        // System.out.println("role \n " + roles);
+        // for (RoleEntity roleEntity : roles) {
+        // if (roleEntity.getId() == rolId) {
+        // re = roleEntity;
+        // }
+        // }
+        // // RoleEntity role = new RoleEntity();
+        // // (user.getRole()).setId(rolId);
+        // // // role.setId(rolId);
+        // // (user.getRole()).setLibelle("user");
+        // user.setRole(re);
         System.out.println("user service \n " + user);
         return userRepository.save(user);
     }
@@ -48,6 +54,10 @@ public class UserService {
 
     public UserEntity findByName(String name) {
         return userRepository.findByName(name);
+    }
+
+    public List<RoleEntity> getAllRole() {
+        return (List<RoleEntity>) roleRepository.findAll();
     }
 
 }

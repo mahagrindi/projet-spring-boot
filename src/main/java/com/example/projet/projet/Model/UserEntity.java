@@ -9,9 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Pattern;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -47,11 +46,16 @@ public class UserEntity {
     @OneToMany(mappedBy = "user", targetEntity = DemandeEntity.class)
     private List<DemandeEntity> demande;
 
-    // @ManyToOne(fetch = FetchType.LAZY)
-    // @JoinColumn(name = "role_id", insertable = false,
-    // updatable = false)
-    // @OnDelete(action = OnDeleteAction.CASCADE)
-    // @Fetch(FetchMode.JOIN)
-    // private RoleEntity role;
+    @OneToOne(mappedBy = "userEntity")
+    private TechnicienEntity technicienEntity;
+
+    @Override
+    public String toString() {
+        return "UserEntity [id=" + id + ", Name=" + Name + ", Prenom=" + Prenom + ", Email=" + Email + ", Phone="
+                + Phone + ", Adresse=" + Adresse + ", Password=" + Password + ", role=" + role.getLibelle()
+                + ", demande="
+                + demande
+                + "]";
+    }
 
 }

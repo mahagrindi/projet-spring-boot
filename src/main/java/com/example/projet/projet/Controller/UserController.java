@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import com.example.projet.projet.Model.RoleEntity;
 import com.example.projet.projet.Model.UserEntity;
 import com.example.projet.projet.Service.UserService;
 
@@ -41,8 +42,18 @@ public class UserController {
     public String saveUser(@ModelAttribute("user") UserEntity user) {
 
         System.out.println("post \n" + user);
-        userService.addUser(user, 2);
+        System.out.println("post achraf test  \n" + user.getRole());
+        if (user.getRole().getId() == 3) {
+            System.out.println("hello technician !");
+            userService.addUser(user);
+
+        } else {
+            System.out.println("hello user !");
+            userService.addUser(user);
+
+        }
         return "redirect:/";
+
     }
     // @RequestMapping(path = "/users/add", method = RequestMethod.POST)
     // @ResponseBody
@@ -66,8 +77,8 @@ public class UserController {
 
     @GetMapping("/users/{id}")
     @ResponseBody
-    public UserEntity getUserById(@PathVariable("id") int userId) {
-        return userService.getUserById(userId);
+    public String getUserById(@PathVariable("id") int userId) {
+        return userService.getUserById(userId).toString();
     }
 
     @RequestMapping(path = "/users/delete/{id}", method = RequestMethod.DELETE)
@@ -80,6 +91,12 @@ public class UserController {
     @ResponseBody
     public String handleIllegalArgsException(IllegalArgumentException e) {
         return "Error in search :" + e.getMessage();
+    }
+
+    @GetMapping("/users/allRole")
+    @ResponseBody
+    public List<RoleEntity> getAllRole() {
+        return userService.getAllRole();
     }
 
 }
