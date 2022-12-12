@@ -30,7 +30,9 @@
           <span class="navbar-toggler-icon"></span>
         </button>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                <a class="navbar-brand" href="#">Hidden brand</a>
+                <a class="navbar-brand" href="#">
+                    <img src="../../../../service-photos/logo.jpg" alt="" width="50" height="50" class="d-inline-block align-text-top" />
+                </a>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
@@ -79,18 +81,18 @@
                         <a href="details-service.html" th:href="@{/services/{id}(id=${service.id})}" class="btn btn-primary">View Details</a
               >
 
-              <!-- <span th:object="${user}" th:if="${user.role.id == 2}"> -->
-              <a
-                th:href="@{/update/{id}(id=${service.id})}"
-                class="btn btn-success"
-                >Update</a
-              >
-              <a
-                th:href="@{/services/delete/{id}(id=${service.id})}"
-                class="btn btn-danger"
-                >delete</a
-              >
-              <!-- </span> -->
+              <span th:object="${user}" th:if="${user.role.id == 1}">
+                <a
+                  th:href="@{/update/{id}(id=${service.id})}"
+                  class="btn btn-success"
+                  >Update</a
+                >
+                <a
+                  th:href="@{/services/delete/{id}(id=${service.id})}"
+                  class="btn btn-danger"
+                  >delete</a
+                >
+              </span>
 
               <a
                 th:href="@{/demande/add/{id}(id=${service.id})}"
