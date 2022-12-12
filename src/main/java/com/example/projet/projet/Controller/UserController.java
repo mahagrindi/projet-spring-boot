@@ -1,11 +1,7 @@
 package com.example.projet.projet.Controller;
 
 import java.util.List;
-
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,7 +31,6 @@ public class UserController {
     @Autowired
     private technicienService servicetech;
 
-    @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
@@ -52,6 +47,13 @@ public class UserController {
         return "singup";
     }
 
+    @GetMapping(value = "/")
+    public String singin(Model model) {
+        UserEntity user = new UserEntity();
+        model.addAttribute("user", user);
+        return "index";
+    }
+
     @PostMapping("/singup")
     public String saveUser(@ModelAttribute("user") UserEntity user,
             @ModelAttribute("categorie") CategorieEntity categorie, HttpServletRequest request) {
@@ -61,7 +63,7 @@ public class UserController {
         System.out.println("categorie est " + categorie.getId());
         if (user.getRole().getId() == 3) {
             userService.addUser(user);
-            // UserEntity userentity = userService.findByName(user.getName());
+            UserEntity userentity = userService.findByName(user.getName());
             TechnicienEntity technicienEntity = new TechnicienEntity();
             technicienEntity.setCategorie(categorie);
             technicienEntity.getUserEntity().setId(user.getId());
@@ -71,7 +73,6 @@ public class UserController {
             request.getSession().setAttribute("technicien", technicienEntity);
             request.getSession().setAttribute("client", userentity);
 
-
         } else {
             System.out.println("hello user !");
             userService.addUser(user);
@@ -80,6 +81,27 @@ public class UserController {
         }
         return "redirect:/services/all";
 
+    }
+
+    @PostMapping("/")
+    public String getUser(@ModelAttribute("user") UserEntity user,
+            HttpServletRequest request) {
+        System.out.println("singin user" + user);
+        UserEntity userEntity = userService.findByEmail(user.getEmail());
+        System.out.println(userEntity);
+        if (user.getPassword().equals(userEntity.getPassword())) {
+            System.out.println("yes");
+            if (userEntity.getRole().getId() == 3) {
+                request.getSession().setAttribute("client", userEntity);
+                TechnicienEntity technicienEntity = userEntity.getTechnicienEntity();
+                request.getSession().setAttribute("technicien", technicienEntity);
+            } else {
+                request.getSession().setAttribute("client", userEntity);
+            }
+        } else {
+            System.out.println("no");
+        }
+        return "redirect:/services/all";
     }
     // @RequestMapping(path = "/users/add", method = RequestMethod.POST)
     // @ResponseBody

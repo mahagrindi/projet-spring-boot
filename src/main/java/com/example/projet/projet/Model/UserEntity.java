@@ -52,7 +52,8 @@ public class UserEntity {
     @Override
     public String toString() {
         return "UserEntity [id=" + id + ", Name=" + Name + ", Prenom=" + Prenom + ", Email=" + Email + ", Phone="
-                + Phone + ", Adresse=" + Adresse + ", Password=" + Password + ", role=" + role.getId() + ", demande="
+                + Phone + ", Adresse=" + Adresse + ", Password=" + Password + ", role="
+                + (role != null ? role.getId() : null) + ", demande="
                 + demande
                 + ", technicienEntity=" + (technicienEntity != null ? technicienEntity.getId() : null) + "]";
 

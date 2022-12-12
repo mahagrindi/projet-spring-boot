@@ -25,7 +25,7 @@ public class technicienService {
         return technicienRepository.findAll();
     }
 
-    public Optional<TechnicienEntity> findById(Integer id) {
+    public Optional<TechnicienEntity> findById(int id) {
         return technicienRepository.findById(id);
     }
 
