@@ -99,10 +99,11 @@ public class UserController {
             } else {
                 request.getSession().setAttribute("client", userEntity);
             }
+            return "redirect:/services/all";
         } else {
             System.out.println("no");
         }
-        return "redirect:/services/all";
+        return "redirect:/";
     }
     // @RequestMapping(path = "/users/add", method = RequestMethod.POST)
     // @ResponseBody
