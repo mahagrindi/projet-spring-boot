@@ -64,9 +64,10 @@ public class UserController {
         if (user.getRole().getId() == 3) {
             userService.addUser(user);
             UserEntity userentity = userService.findByName(user.getName());
+            System.out.println(userentity);
             TechnicienEntity technicienEntity = new TechnicienEntity();
             technicienEntity.setCategorie(categorie);
-            technicienEntity.getUserEntity().setId(user.getId());
+            technicienEntity.setUserEntity(userentity);
             technicienEntity.setNote(0);
             System.out.println(technicienEntity);
             servicetech.save(technicienEntity);
