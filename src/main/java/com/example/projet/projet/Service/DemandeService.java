@@ -40,6 +40,10 @@ public List<DemandeEntity> selectAll(){
     return  (List<DemandeEntity>) demandeRepository.findAll();
 }
 
+public List<DemandeEntity> historiqueDemande(UserEntity user){
+    return (List<DemandeEntity>) demandeRepository.findByEtat(user);
+}
+
 
 public DemandeEntity addDemande(DemandeEntity demande,int userId,int serviceId){
     UserEntity user = userRepository.findById(userId).get();
@@ -62,9 +66,11 @@ public String deleteDemande(int id) {
 }
 
 public DemandeEntity updateDemande(DemandeEntity demande){
-    demande.setEtat("acceptée");
+    demande.setEtat("acceptee");
     return demandeRepository.save(demande);
 }
+
+
 
 
 

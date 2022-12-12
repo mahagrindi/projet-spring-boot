@@ -35,10 +35,12 @@
 
                         <small th:text="${detailService.categorie.Libelle}" class="text-muted"></small>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
 
+                    <a th:href="@{/demande/add/{id}(id=${detailService.id})}" class="btn btn-warning">demande</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

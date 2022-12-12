@@ -12,7 +12,7 @@
 
 <body>
     <div class="w-100 my-4 p-3" style="background-color: #eee">
-        <h1 class="card-title text-center p-3">Listes des demandes</h1>
+        <h1 class="card-title text-center p-3">Histortique Demandes</h1>
     </div>
     <div class="container">
         <table class="table table-responsive table-striped">
@@ -26,7 +26,7 @@
                     <th scope="col">Etat</th>
                     <th scope="col">Prix Total</th>
                     <th th:object="${user}" scope="col">
-                        <span th:if="${user.role.id == 3}"> Accepter </span>
+                        <span> Payer </span>
                     </th>
                 </tr>
                 </tr>
@@ -41,8 +41,8 @@
                     <td th:text="${demande.Heure}"></td>
                     <td th:text="${demande.Etat}"></td>
                     <td th:text="${demande.Prix_total}+  DT"></td>
-                    <td th:object="${user}">
-                        <a th:if="${user.role.id == 3}" class="btn btn-success" th:href="@{/demande/update/{id}(id=${demande.id})}">Accepter</a
+                    <td>
+                        <a class="btn btn-success">Accepter</a
               >
             </td>
           </tr>

@@ -9,20 +9,43 @@
     <title>List Services</title>
 </head>
 
-<body>
-    <style>
-        .card-img-top {
-            width: 100%;
-            height: 15vw;
-            object-fit: cover;
-        }
-        /* .card-title {
+<style>
+    .card-img-top {
+        width: 100%;
+        height: 15vw;
+        object-fit: cover;
+    }
+    /* .card-title {
             white-space: nowrap;
             width: 75%;
             overflow: hidden;
             text-overflow: ellipsis;
         } */
-    </style>
+</style>
+
+<body>
+    <nav class="navbar navbar-expand-lg sticky-top bg-light">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <a class="navbar-brand" href="#">Hidden brand</a>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled">Disabled</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
     <div class="w-100 my-4 p-3" style="background-color: #eee">
         <h1 class="card-title text-center p-3">All Services</h1>
     </div>
@@ -55,6 +78,8 @@
                         <p class="card-text" th:text="${service.categorie.Libelle}"></p>
                         <a href="details-service.html" th:href="@{/services/{id}(id=${service.id})}" class="btn btn-primary">View Details</a
               >
+
+              <!-- <span th:object="${user}" th:if="${user.role.id == 2}"> -->
               <a
                 th:href="@{/update/{id}(id=${service.id})}"
                 class="btn btn-success"
@@ -65,6 +90,7 @@
                 class="btn btn-danger"
                 >delete</a
               >
+              <!-- </span> -->
 
               <a
                 th:href="@{/demande/add/{id}(id=${service.id})}"
