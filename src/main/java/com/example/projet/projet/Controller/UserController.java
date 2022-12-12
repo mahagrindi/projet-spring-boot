@@ -59,10 +59,10 @@ public class UserController {
         System.out.println("categorie est " + categorie.getId());
         if (user.getRole().getId() == 3) {
             userService.addUser(user);
-            UserEntity userentity = userService.findByName(user.getName());
+            // UserEntity userentity = userService.findByName(user.getName());
             TechnicienEntity technicienEntity = new TechnicienEntity();
             technicienEntity.setCategorie(categorie);
-            technicienEntity.setUserEntity(userentity);
+            technicienEntity.getUserEntity().setId(user.getId());
             technicienEntity.setNote(0);
             System.out.println(technicienEntity);
             servicetech.save(technicienEntity);
