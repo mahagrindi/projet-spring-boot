@@ -11,4 +11,9 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
     // true)
     public UserEntity findByName(String name);
 
+    @Query("Select e from UserEntity e where e.Email = ?1")
+    // @Query(value = "Select * from Users e where e.name = %?1%", nativeQuery =
+    // true)
+    public UserEntity findByEmail(String email);
+
 }
