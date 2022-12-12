@@ -1,17 +1,14 @@
 package com.example.projet.projet.Model;
 
-import java.sql.Time;
-import java.time.LocalDate;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
@@ -44,6 +41,10 @@ private String  date;
 
 @Column(name = "heure", nullable = false)
 private String  heure;
+
+@Column(name = "etat")
+@ColumnDefault("'en attente'")
+private String  etat;
 
 
 @Column(name = "quantite", columnDefinition = "integer default 1", nullable = false)

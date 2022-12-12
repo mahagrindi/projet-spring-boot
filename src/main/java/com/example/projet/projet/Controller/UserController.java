@@ -2,6 +2,8 @@ package com.example.projet.projet.Controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,8 +54,8 @@ public class UserController {
 
     @PostMapping("/singup")
     public String saveUser(@ModelAttribute("user") UserEntity user,
-            @ModelAttribute("categorie") CategorieEntity categorie, HttpSession session) {
-
+            @ModelAttribute("categorie") CategorieEntity categorie, HttpServletRequest request) {
+        user.setId(0);
         System.out.println("post \n" + user);
         System.out.println("post achraf test  \n" + user.getRole());
         System.out.println("categorie est " + categorie.getId());
@@ -66,15 +68,17 @@ public class UserController {
             technicienEntity.setNote(0);
             System.out.println(technicienEntity);
             servicetech.save(technicienEntity);
-            session.setAttribute("technicien", technicienEntity);
+            request.getSession().setAttribute("technicien", technicienEntity);
+            request.getSession().setAttribute("client", userentity);
+
 
         } else {
             System.out.println("hello user !");
             userService.addUser(user);
-
+            UserEntity userentity = userService.findByName(user.getName());
+            request.getSession().setAttribute("client", userentity);
         }
-        session.setAttribute("client", user);
-        return "redirect:/";
+        return "redirect:/services/all";
 
     }
     // @RequestMapping(path = "/users/add", method = RequestMethod.POST)

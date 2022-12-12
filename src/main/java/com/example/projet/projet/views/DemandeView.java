@@ -24,12 +24,14 @@ public class DemandeView {
     private String heure;
     private int qte;
     private int id_service;
-
+    private String etat;
     
 
 
+
+
     public DemandeView(int idDemande, Double prix_total, String description, String date, String heure, int qte,
-            int id_service) {
+            int id_service, String etat) {
         this.idDemande = idDemande;
         this.prix_total = prix_total;
         this.description = description;
@@ -37,11 +39,15 @@ public class DemandeView {
         this.heure = heure;
         this.qte = qte;
         this.id_service = id_service;
+        this.etat = etat;
     }
 
 
+
+
+
     public DemandeEntity buildEntity(){
-        return DemandeEntity.builder().id(this.idDemande).description(this.description).prix_total(this.prix_total).date(this.date).heure(this.heure).qte(this.qte).build();
+        return DemandeEntity.builder().id(this.idDemande).description(this.description).prix_total(this.prix_total).date(this.date).heure(this.heure).qte(this.qte).etat(this.etat).build();
     }
 
     
