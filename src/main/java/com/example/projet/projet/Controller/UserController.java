@@ -55,7 +55,7 @@ public class UserController {
     @PostMapping("/singup")
     public String saveUser(@ModelAttribute("user") UserEntity user,
             @ModelAttribute("categorie") CategorieEntity categorie, HttpServletRequest request) {
-
+        user.setId(0);
         System.out.println("post \n" + user);
         System.out.println("post achraf test  \n" + user.getRole());
         System.out.println("categorie est " + categorie.getId());
@@ -75,7 +75,8 @@ public class UserController {
         } else {
             System.out.println("hello user !");
             userService.addUser(user);
-            request.getSession().setAttribute("client", user);
+            UserEntity userentity = userService.findByName(user.getName());
+            request.getSession().setAttribute("client", userentity);
         }
         return "redirect:/services/all";
 

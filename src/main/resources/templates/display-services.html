@@ -35,6 +35,9 @@
         </div>
     </div>
     <div class="container">
+        <div th:object="${user}">
+            <!-- <h4>Welcome<span th:text="${user.Name}"></span></h4> -->
+        </div>
         <a th:href="@{/add}" class="btn btn-secondary">Add new Service</a>
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <div th:each="service:${allServices}" class="col mb-md-3 mb-sm-1">

@@ -41,7 +41,9 @@ public DemandeController(DemandeService demandeService, ServiceService serviceSe
 
 
 @GetMapping("/demandes/all")
-public String displayDemande(Model model){
+public String displayDemande(Model model,HttpServletRequest request){
+    UserEntity user = (UserEntity) request.getSession().getAttribute("client");
+    model.addAttribute("user", user);
     model.addAttribute("allDemandes", demandeService.selectAll());
     // model.addAttribute("service", demandeService.getService(null));
     return "display-demande";
@@ -61,6 +63,7 @@ public String saveService(@ModelAttribute("demande") @Valid DemandeView demande,
 ){
     UserEntity user = (UserEntity) request.getSession().getAttribute("client");
     System.out.println("affichage session"+user);
+    System.out.println("user id " + user.getId());
     demandeService.addDemande(demande.buildEntity(), user.getId(), demande.getId_service());
     return "redirect:/demandes/all";
 }

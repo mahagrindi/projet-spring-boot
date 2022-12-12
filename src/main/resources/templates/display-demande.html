@@ -25,9 +25,13 @@
                     <th scope="col">Heure</th>
                     <th scope="col">Etat</th>
                     <th scope="col">Prix Total</th>
-                    <th scope="col">Accepter</th>
+                    <th th:object="${user}" scope="col">
+                        <span th:if="${user.role.id == 3}"> Accepter </span>
+                    </th>
+                </tr>
                 </tr>
             </thead>
+
             <tbody>
                 <tr th:each="demande:${allDemandes}">
                     <th scope="row" th:text="${demande.id}">1</th>

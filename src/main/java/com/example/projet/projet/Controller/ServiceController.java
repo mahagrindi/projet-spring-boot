@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.projet.projet.Model.ServiceEntity;
+import com.example.projet.projet.Model.UserEntity;
 import com.example.projet.projet.Service.CategorieService;
 import com.example.projet.projet.Service.ServiceService;
 import com.example.projet.projet.configs.FileUploadUtil;
@@ -44,10 +46,13 @@ public class ServiceController {
         this.serviceService = serviceService;
         this.categorieService = categorieService;
     }
-
+   
+   
 
  @GetMapping("/services/all")
-public String viewHomePage(Model model) {
+public String viewHomePage(Model model, HttpServletRequest request) {
+    UserEntity user = (UserEntity) request.getSession().getAttribute("client");
+    model.addAttribute("user", user);
 model.addAttribute("allServices", serviceService.selectAll());
 return "display-services";
 }
