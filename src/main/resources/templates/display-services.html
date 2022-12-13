@@ -341,25 +341,25 @@
                         </div>
                         <p class="card-text" th:text="${service.Description}"></p>
                         <p class="card-text" th:text="${service.categorie.Libelle}"></p>
-                        <a href="details-service.html" th:href="@{/services/{id}(id=${service.id})}" class="btn btn-primary">View Details</a
+                        <a href="details-service.html" th:href="@{/services/{id}(id=${service.id})}" class="btn btn-primary btn-sm">View Details</a
               >
 
               <span th:object="${user}" th:if="${user.role.id == 1}">
                 <a
                   th:href="@{/update/{id}(id=${service.id})}"
-                  class="btn btn-success"
+                  class="btn btn-success btn-sm"
                   >Update</a
                 >
                 <a
                   th:href="@{/services/delete/{id}(id=${service.id})}"
-                  class="btn btn-danger"
+                  class="btn btn-danger btn-sm"
                   >delete</a
                 >
               </span>
 
               <a
                 th:href="@{/demande/add/{id}(id=${service.id})}"
-                class="btn btn-warning"
+                class="btn btn-info btn-sm"
                 >demande</a
               >
             </div>

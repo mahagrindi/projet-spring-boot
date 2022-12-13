@@ -44,6 +44,10 @@ public List<DemandeEntity> historiqueDemande(UserEntity user){
     return (List<DemandeEntity>) demandeRepository.findByEtat(user);
 }
 
+public List<DemandeEntity> currentDemande(UserEntity user){
+    return (List<DemandeEntity>) demandeRepository.currentDemande(user);
+}
+
 
 public List<DemandeEntity> demandeToAccept(){
     return (List<DemandeEntity>) demandeRepository.demandeToAccept("en attente");

@@ -232,7 +232,7 @@
                     <td th:text="${demande.Etat}"></td>
                     <td th:text="${demande.Prix_total}+  DT"></td>
                     <td th:object="${user}">
-                        <a th:if="${user.role.id == 3}" class="btn btn-success" th:href="@{/demande/payer/{id}(id=${demande.id})}">Accepter</a
+                        <a th:if="${user.role.id == 3}" class="btn btn-success" th:href="@{/demande/update/{id}(id=${demande.id})}">Accepter</a
               >
             </td>
           </tr>
@@ -248,12 +248,25 @@
                 <td th:text="${demande.Heure}"></td>
                 <td th:text="${demande.Etat}"></td>
                 <td th:text="${demande.Prix_total}+  DT"></td>
-                <td th:object="${user}">
-                    <a th:if="${user.role.id == 3}" class="btn btn-success" th:href="@{/demande/payer/{id}(id=${demande.id})}">Accepter</a
-          >
-        </td>
+       
       </tr>
     </tbody>
+
+    <tbody  th:if="${user.role.id == 2}">
+        <tr th:each="demande:${allDemandesUser}">
+            <th scope="row" th:text="${demande.id}">1</th>
+            <td th:text="${demande.Description}"></td>
+            <td th:text="${demande.service.Nom}"></td>
+            <td th:text="${demande.Date}"></td>
+            <td th:text="${demande.Heure}"></td>
+            <td th:text="${demande.Etat}"></td>
+            <td th:text="${demande.Prix_total}+  DT"></td>
+            <!-- <td th:object="${user}">
+                <a th:if="${user.role.id == 3}" class="btn btn-success" th:href="@{/demande/payer/{id}(id=${demande.id})}">Accepter</a
+      >
+    </td> -->
+  </tr>
+</tbody>
 
     
     </span>

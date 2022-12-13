@@ -45,4 +45,8 @@ public String deleteService(int id) {
     return "deleted";
 }
 
+public List<ServiceEntity> getByKeyword(String keyword){
+    return serviceRepository.findByKeyword(keyword);
+   }
+
 }

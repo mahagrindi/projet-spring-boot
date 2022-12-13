@@ -229,8 +229,8 @@
                     <td th:text="${demande.Heure}"></td>
                     <td th:text="${demande.Etat}"></td>
                     <td th:text="${demande.Prix_total}+  DT"></td>
-                    <td>
-                        <a class="btn btn-success">Payer</a
+                    <td th:object="${user}">
+                        <a th:if="${user.role.id == 2}" class="btn btn-success" th:href="@{/demande/payer/{id}(id=${demande.id})}">Payer</a
               >
             </td>
           </tr>

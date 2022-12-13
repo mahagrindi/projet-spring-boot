@@ -68,6 +68,7 @@ return "display-services";
         model.addAttribute("detailService", serviceService.getServiceById(serviceId));
         return "details-service";
     }
+    
  
     
     @GetMapping("/add")

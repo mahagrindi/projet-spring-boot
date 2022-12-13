@@ -65,6 +65,17 @@ public String displayDemandeAdmin(Model model,HttpServletRequest request){
 }
 
 
+@GetMapping("/user/demandes/all")
+public String displayDemandeUser(Model model,HttpServletRequest request){
+    UserEntity user = (UserEntity) request.getSession().getAttribute("client");
+    // System.out.println("test user service" + user);
+    model.addAttribute("user", user);
+    model.addAttribute("allDemandesUser", demandeService.currentDemande(user));
+    // model.addAttribute("service", demandeService.getService(null));
+    return "display-demande";
+}
+
+
 
 @GetMapping("/demandes/etat")
 public String afficherEtat(Model model,HttpServletRequest request){
@@ -94,7 +105,7 @@ public String saveService(@ModelAttribute("demande") @Valid DemandeView demande,
     // System.out.println("affichage session"+user);
     // System.out.println("user id " + user.getId());
     demandeService.addDemande(demande.buildEntity(), user.getId(), demande.getId_service());
-    return "redirect:/demandes/all";
+    return "redirect:/user/demandes/all";
 }
 
 @RequestMapping("/demande/update/{id}")
