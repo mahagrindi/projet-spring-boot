@@ -165,20 +165,32 @@
                         <a class="nav-link" aria-current="page" th:href="@{/services/all}">Services</a
               >
             </li>
-            <li>
-              <a class="nav-link" aria-current="page" th:href="@{/demandes/all}"
-                >demandes</a
-              >
-            </li>
+            <li th:object="${user}">
+                <a
+                  th:if="${user.role.id == 3}"
+                  class="nav-link"
+                  aria-current="page"
+                  th:href="@{/demandes/all}"
+                  >demandes</a
+                >
+  
+                <a
+                  th:if="${user.role.id == 1}"
+                  class="nav-link"
+                  aria-current="page"
+                  th:href="@{/demandes/all}"
+                  >demandes</a
+                >
+              </li>
 
             <li th:object="${user}">
-              <a class="nav-link" th:href="@{/demandes/etat}">historique</a>
-                    </li>
-
-                    <li>
-                        <a class="nav-link" aria-current="page" th:href="@{/add}">Add Service</a
-              >
-            </li>
+                <a
+                  class="nav-link"
+                  th:if="${user.role.id == 2}"
+                  th:href="@{/demandes/etat}"
+                  >historique</a
+                >
+              </li>
           </ul>
           <form class="d-flex" action="#" th:action="@{/logOut}" method="POST">
             <button class="btn btn-outline-light" type="submit">Log out</button>
@@ -207,8 +219,10 @@
                 </tr>
                 </tr>
             </thead>
+<span th:object="${user}">
 
-            <tbody>
+
+            <tbody  th:if="${user.role.id == 3}">
                 <tr th:each="demande:${allDemandes}">
                     <th scope="row" th:text="${demande.id}">1</th>
                     <td th:text="${demande.Description}"></td>
@@ -218,11 +232,31 @@
                     <td th:text="${demande.Etat}"></td>
                     <td th:text="${demande.Prix_total}+  DT"></td>
                     <td th:object="${user}">
-                        <a th:if="${user.role.id == 3}" class="btn btn-success" th:href="@{/demande/update/{id}(id=${demande.id})}">Accepter</a
+                        <a th:if="${user.role.id == 3}" class="btn btn-success" th:href="@{/demande/payer/{id}(id=${demande.id})}">Accepter</a
               >
             </td>
           </tr>
         </tbody>
+    
+    
+        <tbody  th:if="${user.role.id == 1}">
+            <tr th:each="demande:${allDemandesAdmin}">
+                <th scope="row" th:text="${demande.id}">1</th>
+                <td th:text="${demande.Description}"></td>
+                <td th:text="${demande.service.Nom}"></td>
+                <td th:text="${demande.Date}"></td>
+                <td th:text="${demande.Heure}"></td>
+                <td th:text="${demande.Etat}"></td>
+                <td th:text="${demande.Prix_total}+  DT"></td>
+                <td th:object="${user}">
+                    <a th:if="${user.role.id == 3}" class="btn btn-success" th:href="@{/demande/payer/{id}(id=${demande.id})}">Accepter</a
+          >
+        </td>
+      </tr>
+    </tbody>
+
+    
+    </span>
       </table>
     </div>
   </body>

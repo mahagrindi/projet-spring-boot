@@ -18,4 +18,12 @@ public interface DemandeRepository extends JpaRepository<DemandeEntity,Integer> 
     public List<DemandeEntity> findByEtat(
         @Param("user") UserEntity user
     );
+
+    @Query("Select e from DemandeEntity e where e.etat = :etat ")
+    public List<DemandeEntity> demandeToAccept(
+        @Param("etat") String etat
+    );
+
+
+
 }

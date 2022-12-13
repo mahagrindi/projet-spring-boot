@@ -45,6 +45,10 @@ public List<DemandeEntity> historiqueDemande(UserEntity user){
 }
 
 
+public List<DemandeEntity> demandeToAccept(){
+    return (List<DemandeEntity>) demandeRepository.demandeToAccept("en attente");
+}
+
 public DemandeEntity addDemande(DemandeEntity demande,int userId,int serviceId){
     UserEntity user = userRepository.findById(userId).get();
     ServiceEntity service = serviceRepository.findById(serviceId).get();
@@ -71,7 +75,10 @@ public DemandeEntity updateDemande(DemandeEntity demande){
 }
 
 
-
+public DemandeEntity PayerDemande(DemandeEntity demande){
+    demande.setEtat("payée");
+    return demandeRepository.save(demande);
+}
 
 
 }

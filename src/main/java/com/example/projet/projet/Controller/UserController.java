@@ -58,9 +58,9 @@ public class UserController {
     public String saveUser(@ModelAttribute("user") UserEntity user,
             @ModelAttribute("categorie") CategorieEntity categorie, HttpServletRequest request) {
         user.setId(0);
-        System.out.println("post \n" + user);
-        System.out.println("post achraf test  \n" + user.getRole());
-        System.out.println("categorie est " + categorie.getId());
+        // System.out.println("post \n" + user);
+        // System.out.println("post achraf test  \n" + user.getRole());
+        // System.out.println("categorie est " + categorie.getId());
         if (user.getRole().getId() == 3) {
             userService.addUser(user);
             UserEntity userentity = userService.findByName(user.getName());
@@ -73,7 +73,7 @@ public class UserController {
             request.getSession().setAttribute("client", userentity);
 
         } else {
-            System.out.println("hello user !");
+            // System.out.println("hello user !");
             userService.addUser(user);
             UserEntity userentity = userService.findByName(user.getName());
             request.getSession().setAttribute("client", userentity);
@@ -94,9 +94,9 @@ public class UserController {
             HttpServletRequest request) {
         UserEntity userEntity = userService.findByEmail(user.getEmail());
         if (user.getPassword().equals(userEntity.getPassword())) {
-            System.out.println("yes");
+            // System.out.println("yes");
             if (userEntity.getRole().getId() == 3) {
-                System.out.println("yes tech");
+                // System.out.println("yes tech");
                 request.getSession().setAttribute("client", userEntity);
                 TechnicienEntity technicienEntity = userEntity.getTechnicienEntity();
                 request.getSession().setAttribute("technicien", technicienEntity);
@@ -105,7 +105,7 @@ public class UserController {
             }
             return "redirect:/services/all";
         } else {
-            System.out.println("no");
+            // System.out.println("no");
         }
         return "redirect:/";
     }

@@ -165,11 +165,23 @@
                         <a class="nav-link" aria-current="page" th:href="@{/services/all}">Services</a
               >
             </li>
-            <li>
-              <a class="nav-link" aria-current="page" th:href="@{/demandes/all}"
-                >demandes</a
-              >
-            </li>
+            <li th:object="${user}">
+                <a
+                  th:if="${user.role.id == 3}"
+                  class="nav-link"
+                  aria-current="page"
+                  th:href="@{/demandes/all}"
+                  >demandes</a
+                >
+  
+                <a
+                  th:if="${user.role.id == 1}"
+                  class="nav-link"
+                  aria-current="page"
+                  th:href="@{/demandes/all}"
+                  >demandes</a
+                >
+              </li>
 
             <li th:object="${user}">
               <a class="nav-link" th:href="@{/demandes/etat}">historique</a>
@@ -218,7 +230,7 @@
                     <td th:text="${demande.Etat}"></td>
                     <td th:text="${demande.Prix_total}+  DT"></td>
                     <td>
-                        <a class="btn btn-success">Accepter</a
+                        <a class="btn btn-success">Payer</a
               >
             </td>
           </tr>

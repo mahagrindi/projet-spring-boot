@@ -177,8 +177,20 @@
                         <a class="nav-link" aria-current="page" th:href="@{/services/all}">Services</a
               >
             </li>
-            <li>
-              <a class="nav-link" aria-current="page" th:href="@{/demandes/all}"
+            <li th:object="${user}">
+              <a
+                th:if="${user.role.id == 3}"
+                class="nav-link"
+                aria-current="page"
+                th:href="@{/demandes/all}"
+                >demandes</a
+              >
+
+              <a
+                th:if="${user.role.id == 1}"
+                class="nav-link"
+                aria-current="page"
+                th:href="@{/demandes/all}"
                 >demandes</a
               >
             </li>

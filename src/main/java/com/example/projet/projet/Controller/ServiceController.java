@@ -57,8 +57,14 @@ model.addAttribute("allServices", serviceService.selectAll());
 return "display-services";
 }
 
+
+   
+
  @GetMapping("/services/{id}")
-    public String viewDetailsService(@PathVariable("id") int serviceId,Model model) {
+    public String viewDetailsService(@PathVariable("id") int serviceId,Model model,HttpServletRequest request) {
+        UserEntity user = (UserEntity) request.getSession().getAttribute("client");
+      
+        model.addAttribute("user", user);
         model.addAttribute("detailService", serviceService.getServiceById(serviceId));
         return "details-service";
     }

@@ -46,16 +46,22 @@ public DemandeController(DemandeService demandeService, ServiceService serviceSe
 @GetMapping("/demandes/all")
 public String displayDemande(Model model,HttpServletRequest request){
     UserEntity user = (UserEntity) request.getSession().getAttribute("client");
-    System.out.println("test user service" + user);
+    // System.out.println("test user service" + user);
     model.addAttribute("user", user);
-    model.addAttribute("allDemandes", demandeService.selectAll());
+    model.addAttribute("allDemandes", demandeService.demandeToAccept());
     // model.addAttribute("service", demandeService.getService(null));
     return "display-demande";
 }
 
-@GetMapping("/inner")
-public String test(){
-    return"inner-page";
+
+@GetMapping("/admin/demandes/all")
+public String displayDemandeAdmin(Model model,HttpServletRequest request){
+    UserEntity user = (UserEntity) request.getSession().getAttribute("client");
+    // System.out.println("test user service" + user);
+    model.addAttribute("user", user);
+    model.addAttribute("allDemandesAdmin", demandeService.selectAll());
+    // model.addAttribute("service", demandeService.getService(null));
+    return "display-demande";
 }
 
 
@@ -85,8 +91,8 @@ public String saveDemande(Model model, @PathVariable("id") int serviceId,HttpSer
 public String saveService(@ModelAttribute("demande") @Valid DemandeView demande,HttpServletRequest request
 ){
     UserEntity user = (UserEntity) request.getSession().getAttribute("client");
-    System.out.println("affichage session"+user);
-    System.out.println("user id " + user.getId());
+    // System.out.println("affichage session"+user);
+    // System.out.println("user id " + user.getId());
     demandeService.addDemande(demande.buildEntity(), user.getId(), demande.getId_service());
     return "redirect:/demandes/all";
 }
@@ -97,6 +103,11 @@ public String updateDemande(@PathVariable("id") int id,Model model){
     return "redirect:/demandes/all";
 }
 
+@RequestMapping("/demande/payer/{id}")
+public String PayerDemande(@PathVariable("id") int id,Model model){
+   demandeService.PayerDemande(demandeService.getDemandeById(id));
+    return "redirect:/demandes/all";
+}
 
 
 

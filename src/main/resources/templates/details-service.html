@@ -165,18 +165,40 @@
                         <a class="nav-link" aria-current="page" th:href="@{/services/all}">Services</a
               >
             </li>
-            <li>
-              <a class="nav-link" aria-current="page" th:href="@{/demandes/all}"
+            <li th:object="${user}">
+              <a
+                th:if="${user.role.id == 3}"
+                class="nav-link"
+                aria-current="page"
+                th:href="@{/demandes/all}"
+                >demandes</a
+              >
+
+              <a
+                th:if="${user.role.id == 1}"
+                class="nav-link"
+                aria-current="page"
+                th:href="@{/demandes/all}"
                 >demandes</a
               >
             </li>
 
             <li th:object="${user}">
-              <a class="nav-link" th:href="@{/demandes/etat}">historique</a>
-                    </li>
+              <a
+                class="nav-link"
+                th:unless="${user.role.id == 1}"
+                th:href="@{/demandes/etat}"
+                >historique</a
+              >
+            </li>
 
-                    <li>
-                        <a class="nav-link" aria-current="page" th:href="@{/add}">Add Service</a
+            <li>
+              <a
+                th:if="${user.role.id == 1}"
+                class="nav-link"
+                aria-current="page"
+                th:href="@{/add}"
+                >Add Service</a
               >
             </li>
           </ul>
@@ -217,7 +239,7 @@
 
             <a
               th:href="@{/demande/add/{id}(id=${detailService.id})}"
-              class="btn btn-warning"
+              class="btn mx-3 btn-warning"
               >demande</a
             >
           </div>
