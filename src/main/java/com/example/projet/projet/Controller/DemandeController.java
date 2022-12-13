@@ -53,6 +53,11 @@ public String displayDemande(Model model,HttpServletRequest request){
     return "display-demande";
 }
 
+@GetMapping("/inner")
+public String test(){
+    return"inner-page";
+}
+
 
 
 @GetMapping("/demandes/etat")

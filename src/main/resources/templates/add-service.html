@@ -9,31 +9,233 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <title>Add New Service</title>
 </head>
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+    
+     ::selection {
+        color: #000;
+        background: #fff;
+    }
+    
+    nav {
+        position: fixed;
+        background: #007a9c;
+        width: 100%;
+        padding: 10px 0;
+        z-index: 12;
+    }
+    
+    nav .menu {
+        max-width: 1250px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+    }
+    
+    .menu .logo a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 35px;
+        font-weight: 600;
+    }
+    
+    .menu ul {
+        display: inline-flex;
+    }
+    
+    .menu ul li {
+        list-style: none;
+        margin-left: 7px;
+    }
+    
+    .menu ul li:first-child {
+        margin-left: 0px;
+    }
+    
+    .menu ul li a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 18px;
+        font-weight: 500;
+        padding: 8px 15px;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+    }
+    
+    .menu ul li a:hover {
+        background: #fff;
+        color: black;
+    }
+    
+    .img {
+        background: url("../../../../service-photos/fond.jpeg") no-repeat;
+        width: 100%;
+        height: 100vh;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+    }
+    
+    .img::before {
+        content: "";
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.4);
+    }
+    
+    .center {
+        position: absolute;
+        top: 52%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        padding: 0 20px;
+        text-align: center;
+    }
+    
+    .center .title {
+        color: #fff;
+        font-size: 55px;
+        font-weight: 600;
+    }
+    
+    .center .sub_title {
+        color: #fff;
+        font-size: 52px;
+        font-weight: 600;
+    }
+    
+    .center .btns {
+        margin-top: 20px;
+    }
+    
+    .center .btns button {
+        height: 55px;
+        width: 170px;
+        border-radius: 5px;
+        border: none;
+        margin: 0 10px;
+        border: 2px solid white;
+        font-size: 20px;
+        font-weight: 500;
+        padding: 0 10px;
+        cursor: pointer;
+        outline: none;
+        transition: all 0.3s ease;
+    }
+    
+    .center .btns button:first-child {
+        color: #fff;
+        background: none;
+    }
+    
+    .btns button:first-child:hover {
+        background: white;
+        color: black;
+    }
+    
+    .center .btns button:last-child {
+        background: white;
+        color: black;
+    }
+</style>
 
 <body>
+    <div>
+        <nav class="">
+            <div class="menu">
+                <div class="logo">
+                    <a class="navbar-brand" href="#">
+                        <img src="../../../../service-photos/logo2.png" alt="Bootstrap" width="80" height="80" /> MassServices
+                    </a>
+                </div>
+                <ul>
+                    <li><a class="nav-link" href="#">Home</a></li>
+                    <li><a class="nav-link" href="#">About</a></li>
+                    <li>
+                        <a class="nav-link" aria-current="page" th:href="@{/services/all}">Services</a
+              >
+            </li>
+            <li>
+              <a class="nav-link" aria-current="page" th:href="@{/demandes/all}"
+                >demandes</a
+              >
+            </li>
+
+            <li th:object="${user}">
+              <a class="nav-link" th:href="@{/demandes/etat}">historique</a>
+                    </li>
+
+                    <li>
+                        <a class="nav-link" aria-current="page" th:href="@{/add}">Add Service</a
+              >
+            </li>
+          </ul>
+          <form class="d-flex" action="#" th:action="@{/logOut}" method="POST">
+            <button class="btn btn-outline-light" type="submit">Log out</button>
+          </form>
+        </div>
+      </nav>
+    </div>
+    <br /><br /><br /><br /><br /><br /><br />
     <div class="container">
-        <div class="row no-gutters">
-            <div class="col-md-9 offset-md-2 wrap-about ftco-animate">
-                <div class="heading-section heading-section-white pl-md-5">
-                    <h1 class="text-center mb-3">
-                        <span class="subheading">Service Info</span>
-                    </h1>
-                    <form action="/add" enctype="multipart/form-data" method="post" class="bg-light p-5 row g-3" th:object="${service}">
-                        <input type="text" class="form-control" placeholder="id" th:field="*{idService}" hidden />
+      <div class="row no-gutters">
+        <div class="col-md-9 offset-md-2 wrap-about ftco-animate">
+          <div class="heading-section heading-section-white pl-md-5">
+            <h1 class="text-center mb-3" style="background-color: #eee">
+              <span class="subheading text-primary">Service Info</span>
+            </h1>
+            <br />
+            <form
+              action="/add"
+              enctype="multipart/form-data"
+              method="post"
+              class="bg-light p-5 row g-3"
+              th:object="${service}"
+            >
+              <input
+                type="text"
+                class="form-control"
+                placeholder="id"
+                th:field="*{idService}"
+                hidden
+              />
 
-                        <div class="mb-3">
-                            <!-- <input type="text" class="form-control" th:field="*{id}" hidden /> -->
-                            <label for="validationDefault01" class="form-label">Nom</label>
-                            <input type="text" class="form-control" placeholder="Nom service" th:field="*{Nom}" required />
-                        </div>
+              <div class="mb-3">
+                <!-- <input type="text" class="form-control" th:field="*{id}" hidden /> -->
+                <label for="validationDefault01" class="form-label">Nom</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Nom service"
+                  th:field="*{Nom}"
+                  required
+                />
+              </div>
 
-                        <div class="mb-3">
-                            <label for="validationDefault03" class="form-label">Desc</label>
-                            <input type="text" class="form-control" placeholder="Nom service" th:field="*{Description}" required />
-                        </div>
+              <div class="mb-3">
+                <label for="validationDefault03" class="form-label">Desc</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Nom service"
+                  th:field="*{Description}"
+                  required
+                />
+              </div>
 
-                        <div class="mb-3">
-                            <label for="validationDefault02" class="form-label">image</label
+              <div class="mb-3">
+                <label for="validationDefault02" class="form-label"
+                  >image</label
                 >
                 <input
                   id="image"
@@ -46,13 +248,25 @@
               </div>
               <div class="mb-3">
                 <label class="form-label">Prix</label>
-                            <input type="text" class="form-control" placeholder="Nom service" aria-describedby="emailHelp" th:field="*{Prix}" required />
-                            <!-- <small th:if="${#fields.hasErrors('Nom')}" style="color: darkred" th:errors="*{Nom}"></small> -->
-                        </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Nom service"
+                  aria-describedby="emailHelp"
+                  th:field="*{Prix}"
+                  required
+                />
+                <!-- <small th:if="${#fields.hasErrors('Nom')}" style="color: darkred" th:errors="*{Nom}"></small> -->
+              </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">categories</label>
-                            <select class="form-select" th:field="*{id_categorie} " name="categories" required>
+              <div class="mb-3">
+                <label class="form-label">categories</label>
+                <select
+                  class="form-select"
+                  th:field="*{id_categorie} "
+                  name="categories"
+                  required
+                >
                   <!-- <select class="form-select" th:field="*{categorie} " name="categories" required> -->
                   <option
                     th:each="categorie:${categories}"
@@ -60,17 +274,16 @@
                     th:text="${categorie.Libelle}"
                   ></option>
                 </select>
-                        </div>
-                        <div class="form-group text-center">
-                            <button class="btn btn-primary" type="submit">
+              </div>
+              <div class="form-group text-center">
+                <button class="btn btn-primary" type="submit">
                   Submit form
                 </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+              </div>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
-</body>
-
+  </body>
 </html>

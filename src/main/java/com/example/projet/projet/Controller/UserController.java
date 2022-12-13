@@ -64,12 +64,10 @@ public class UserController {
         if (user.getRole().getId() == 3) {
             userService.addUser(user);
             UserEntity userentity = userService.findByName(user.getName());
-            System.out.println(userentity);
             TechnicienEntity technicienEntity = new TechnicienEntity();
             technicienEntity.setCategorie(categorie);
             technicienEntity.setUserEntity(userentity);
             technicienEntity.setNote(0);
-            System.out.println(technicienEntity);
             servicetech.save(technicienEntity);
             request.getSession().setAttribute("technicien", technicienEntity);
             request.getSession().setAttribute("client", userentity);
@@ -84,15 +82,21 @@ public class UserController {
 
     }
 
+    @PostMapping("/logOut")
+    public String logOut(HttpServletRequest request) {
+        request.getSession().removeAttribute("client");
+        return "redirect:/";
+
+    }
+
     @PostMapping("/")
     public String getUser(@ModelAttribute("user") UserEntity user,
             HttpServletRequest request) {
-        System.out.println("singin user" + user);
         UserEntity userEntity = userService.findByEmail(user.getEmail());
-        System.out.println(userEntity);
         if (user.getPassword().equals(userEntity.getPassword())) {
             System.out.println("yes");
             if (userEntity.getRole().getId() == 3) {
+                System.out.println("yes tech");
                 request.getSession().setAttribute("client", userEntity);
                 TechnicienEntity technicienEntity = userEntity.getTechnicienEntity();
                 request.getSession().setAttribute("technicien", technicienEntity);

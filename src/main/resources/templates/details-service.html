@@ -8,35 +8,217 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
     <title>Details Services</title>
 </head>
+
 <style>
-    .card-img {
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+    
+     ::selection {
+        color: #000;
+        background: #fff;
+    }
+    
+    nav {
+        position: fixed;
+        background: #007a9c;
         width: 100%;
-        object-fit: cover;
+        padding: 10px 0;
+        z-index: 12;
+    }
+    
+    nav .menu {
+        max-width: 1250px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+    }
+    
+    .menu .logo a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 35px;
+        font-weight: 600;
+    }
+    
+    .menu ul {
+        display: inline-flex;
+    }
+    
+    .menu ul li {
+        list-style: none;
+        margin-left: 7px;
+    }
+    
+    .menu ul li:first-child {
+        margin-left: 0px;
+    }
+    
+    .menu ul li a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 18px;
+        font-weight: 500;
+        padding: 8px 15px;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+    }
+    
+    .menu ul li a:hover {
+        background: #fff;
+        color: black;
+    }
+    
+    .img {
+        background: url("../../../../service-photos/fond.jpeg") no-repeat;
+        width: 100%;
+        height: 100vh;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+    }
+    
+    .img::before {
+        content: "";
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.4);
+    }
+    
+    .center {
+        position: absolute;
+        top: 52%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        padding: 0 20px;
+        text-align: center;
+    }
+    
+    .center .title {
+        color: #fff;
+        font-size: 55px;
+        font-weight: 600;
+    }
+    
+    .center .sub_title {
+        color: #fff;
+        font-size: 52px;
+        font-weight: 600;
+    }
+    
+    .center .btns {
+        margin-top: 20px;
+    }
+    
+    .center .btns button {
+        height: 55px;
+        width: 170px;
+        border-radius: 5px;
+        border: none;
+        margin: 0 10px;
+        border: 2px solid white;
+        font-size: 20px;
+        font-weight: 500;
+        padding: 0 10px;
+        cursor: pointer;
+        outline: none;
+        transition: all 0.3s ease;
+    }
+    
+    .center .btns button:first-child {
+        color: #fff;
+        background: none;
+    }
+    
+    .btns button:first-child:hover {
+        background: white;
+        color: black;
+    }
+    
+    .center .btns button:last-child {
+        background: white;
+        color: black;
     }
 </style>
 
 <body>
-    <div class="w-100 my-4 p-3" style="background-color: #eee">
-        <h1 class="card-title text-center p-3">Details Service</h1>
-    </div>
-    <div class="container my-5">
-        <div th:object="${detailService}" class="card mb-3 col-md-10">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img th:src="@{${'/service-photos/' + detailService.Image }}" class="img-fluid card-img rounded-start" alt="..." />
+    <div>
+        <nav class="">
+            <div class="menu">
+                <div class="logo">
+                    <a class="navbar-brand" href="#">
+                        <img src="../../../../service-photos/logo2.png" alt="Bootstrap" width="80" height="80" /> MassServices
+                    </a>
                 </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 th:text="${detailService.Nom}" class="card-title"></h5>
-                        <b>
+                <ul>
+                    <li><a class="nav-link" href="#">Home</a></li>
+                    <li><a class="nav-link" href="#">About</a></li>
+                    <li>
+                        <a class="nav-link" aria-current="page" th:href="@{/services/all}">Services</a
+              >
+            </li>
+            <li>
+              <a class="nav-link" aria-current="page" th:href="@{/demandes/all}"
+                >demandes</a
+              >
+            </li>
+
+            <li th:object="${user}">
+              <a class="nav-link" th:href="@{/demandes/etat}">historique</a>
+                    </li>
+
+                    <li>
+                        <a class="nav-link" aria-current="page" th:href="@{/add}">Add Service</a
+              >
+            </li>
+          </ul>
+          <form class="d-flex" action="#" th:action="@{/logOut}" method="POST">
+            <button class="btn btn-outline-light" type="submit">Log out</button>
+          </form>
+        </div>
+      </nav>
+    </div>
+    <br /><br /><br /><br /><br /><br /><br />
+    <span class="w-100 my-4 p-3" style="background-color: #eee">
+      <h1 class="card-title text-center text-primary p-3">Details Service</h1>
+    </span>
+
+    <div class="container my-5">
+      <div th:object="${detailService}" class="card mb-3 col-md-10">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img
+              th:src="@{${'/service-photos/' + detailService.Image }}"
+              class="img-fluid card-img rounded-start"
+              alt="..."
+            />
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 th:text="${detailService.Nom}" class="card-title"></h5>
+              <b>
                 <p class="text-danger" th:text="${detailService.Prix}+'DT'"></p
               ></b>
-                        <p th:text="${detailService.Description}" class="card-text"></p>
+              <p th:text="${detailService.Description}" class="card-text"></p>
 
-                        <small th:text="${detailService.categorie.Libelle}" class="text-muted"></small>
-                    </div>
+              <small
+                th:text="${detailService.categorie.Libelle}"
+                class="text-muted"
+              ></small>
+            </div>
 
-                    <a th:href="@{/demande/add/{id}(id=${detailService.id})}" class="btn btn-warning">demande</a
+            <a
+              th:href="@{/demande/add/{id}(id=${detailService.id})}"
+              class="btn btn-warning"
+              >demande</a
             >
           </div>
         </div>
