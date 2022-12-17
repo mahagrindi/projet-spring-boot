@@ -25,20 +25,7 @@ public class UserService {
     }
 
     public UserEntity addUser(UserEntity user) {
-        // RoleEntity re = new RoleEntity();
-        // // RoleEntity role = (RoleEntity)roleRepository.findById(rolId).get();
-        // List<RoleEntity> roles = (List<RoleEntity>) roleRepository.findAll();
-        // System.out.println("role \n " + roles);
-        // for (RoleEntity roleEntity : roles) {
-        // if (roleEntity.getId() == rolId) {
-        // re = roleEntity;
-        // }
-        // }
-        // // RoleEntity role = new RoleEntity();
-        // // (user.getRole()).setId(rolId);
-        // // // role.setId(rolId);
-        // // (user.getRole()).setLibelle("user");
-        // user.setRole(re);
+      
         return userRepository.save(user);
     }
 

@@ -109,25 +109,7 @@ public class UserController {
         }
         return "redirect:/";
     }
-    // @RequestMapping(path = "/users/add", method = RequestMethod.POST)
-    // @ResponseBody
-
-    // public UserEntity saveUser(@RequestBody UserEntity user) {
-    // System.out.println("hello");
-    // System.out.println(user);
-    // return userService.addUser(user, user.getRole().getId());
-    // }
-    // @GetMapping("/singup")
-    // public String singup(Model model) {
-    // UserEntity user = new UserEntity();
-    // model.addAttribute("client", user);
-    // return "signup";
-    // }
-
-    // @GetMapping("/singup")
-    // public String singup() {
-    // return "singup";
-    // }
+   
 
     @GetMapping("/users/{id}")
     @ResponseBody

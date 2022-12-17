@@ -4,12 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.example.projet.projet.Controller.AllArgsConstructor;
+import lombok.AllArgsConstructor;
 import com.example.projet.projet.Model.CategorieEntity;
 import com.example.projet.projet.Repository.CategorieRepository;
 
 @Service
-@AllArgsConstructor
 public class CategorieService {
 
     private CategorieRepository categorieRepository;
