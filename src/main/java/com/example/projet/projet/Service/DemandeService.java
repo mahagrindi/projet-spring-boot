@@ -2,13 +2,8 @@ package com.example.projet.projet.Service;
 
 import java.util.List;
 
-import org.apache.naming.ServiceRef;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-
 import com.example.projet.projet.Model.DemandeEntity;
 import com.example.projet.projet.Model.ServiceEntity;
 import com.example.projet.projet.Model.UserEntity;
